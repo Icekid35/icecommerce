@@ -1,0 +1,19 @@
+.thank-you-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+}
+.thank-you-page h1 {
+  font-size: 3rem;
+  text-transform: capitalize;
+}
+.thank-you-page .button {
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  font-weight: 700;
+  text-transform: uppercase;
+}/*# sourceMappingURL=thank-you.css.map */

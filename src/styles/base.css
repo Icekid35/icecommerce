@@ -1,0 +1,64 @@
+:root {
+  /* --neutral-color:#FAFAFA; */
+  --neutral-color:#F1F1F1;
+  --text-color:#000;
+  --text-color-light:rgba(0, 0, 0, 0.664);
+  --bg-color:#fff;
+  --primary-color:#03BFFD;
+  --font:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace ;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background-color: var(--neutral-color);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.2s linear;
+  scroll-behavior: smooth;
+}
+*::before, *::after {
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
+.hoverable {
+  position: relative;
+  transform-origin: center center;
+  overflow: hidden;
+}
+.hoverable:hover {
+  cursor: pointer;
+  color: var(--bg-color) !important;
+}
+.hoverable:not(:hover)::before {
+  transform: scaleX(0);
+}
+.hoverable::before {
+  content: "";
+  height: 100%;
+  z-index: -1;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: var(--bg-color);
+  background-color: var(--text-color) !important;
+  transform-origin: center center;
+}/*# sourceMappingURL=base.css.map */

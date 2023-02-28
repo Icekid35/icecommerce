@@ -1,0 +1,136 @@
+.cart-page {
+  margin: 5rem;
+}
+@media (max-width: 600px) {
+  .cart-page {
+    margin: 5rem 0px;
+  }
+}
+.cart-page h1 {
+  font-weight: 400 !important;
+}
+.cart-page table {
+  width: 100%;
+  caption-side: bottom;
+  border-collapse: collapse;
+  text-align: center;
+}
+.cart-page table thead {
+  color: var(--text-color);
+  background-color: #f6f6f6;
+  text-transform: uppercase;
+}
+.cart-page table thead th {
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 10px;
+}
+@media (max-width: 600px) {
+  .cart-page table thead th {
+    font-size: 0.9rem;
+    padding: 2px;
+  }
+}
+.cart-page table tbody {
+  text-transform: capitalize;
+  vertical-align: middle;
+}
+.cart-page table tbody td {
+  padding: 40px 10px;
+}
+.cart-page table tbody td:first-of-type {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .cart-page table tbody td {
+    padding: 10px 5px;
+    font-size: 0.9rem;
+  }
+}
+.cart-page table tbody img {
+  max-width: 100px;
+  aspect-ratio: 1;
+}
+@media (max-width: 600px) {
+  .cart-page table tbody img {
+    max-width: 70px;
+  }
+}
+.cart-page table tbody input {
+  width: 70px;
+  background-color: var(--neutral-color);
+  outline: none;
+  border: none;
+  padding: 1rem;
+}
+@media (max-width: 600px) {
+  .cart-page table tbody input {
+    width: 50px;
+    padding: 1rem 5px;
+  }
+}
+.cart-page .btn {
+  padding: 10px 1rem;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  text-transform: uppercase;
+}
+.cart-page .btn:hover {
+  filter: brightness(0.7);
+}
+.cart-page .update-coupon {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 600px) {
+  .cart-page .update-coupon {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+.cart-page .update-coupon .sec1 {
+  display: flex;
+  justify-content: space-between;
+}
+.cart-page .update-coupon .sec1 input {
+  outline: none;
+  border: 1px solid var(--neutral-color);
+  padding: 10px;
+  max-width: 150px;
+}
+.cart-page .update-coupon .sec2 {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.cart-page .cart-totals-holder {
+  display: flex;
+  justify-content: flex-end;
+}
+.cart-page .cart-totals-holder .cart-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 40%;
+  font-weight: 600;
+  min-width: 200px;
+}
+.cart-page .cart-totals-holder .cart-totals .h2 {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.cart-page .cart-totals-holder .cart-totals .total {
+  display: flex;
+  color: var(--text-color-light);
+  justify-content: space-between;
+  padding: 10px 1rem;
+  text-transform: capitalize;
+  border: 1px solid var(--neutral-color);
+}
+.cart-page .cart-totals-holder .cart-totals .proceed {
+  text-transform: capitalize;
+  width: -moz-fit-content;
+  width: fit-content;
+}/*# sourceMappingURL=cart.css.map */

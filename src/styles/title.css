@@ -1,0 +1,26 @@
+.bread-crumb {
+  width: 99vw;
+  aspect-ratio: 3;
+  color: var(--bg-color);
+  background-color: var(--text-color-light);
+  background-image: url("../assets//bg/breadcrumb.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.bread-crumb .main-text {
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 2rem;
+}
+.bread-crumb .sub-text {
+  text-transform: uppercase;
+  font-weight: 500;
+}/*# sourceMappingURL=title.css.map */

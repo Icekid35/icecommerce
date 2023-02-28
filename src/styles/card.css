@@ -1,0 +1,248 @@
+.card {
+  position: relative;
+  flex-shrink: 0;
+  flex-grow: 1;
+  cursor: pointer;
+  margin: auto;
+}
+.card .card-image {
+  position: relative;
+  background-color: var(--neutral-color);
+  width: -moz-fit-content;
+  width: fit-content;
+  overflow: hidden;
+}
+.card .card-image .hot {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--bg-color);
+  background-color: var(--text-color);
+  padding: 10px 5px;
+  opacity: 0.6;
+  border-radius: 100%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.card .card-image img {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.1);
+}
+.card .card-image:not(:hover) .action-btns {
+  opacity: 0;
+}
+.card .card-image:not(:hover) img {
+  transform: scale(1);
+}
+.card .card-image:not(:hover) .heart {
+  transform: translateX(-50%);
+}
+.card .card-image:not(:hover) .buy {
+  transform: translateY(50%);
+}
+.card .card-image:not(:hover) .preview {
+  transform: translateX(50%);
+}
+.card .card-image .action-btns {
+  display: flex;
+  gap: 1rem;
+  opacity: 1;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.card .card-image .action-btns div {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: var(--text-color);
+  opacity: 0.8;
+  cursor: pointer;
+}
+.card .card-image .action-btns div:hover {
+  opacity: 1;
+}
+.card .card-text {
+  margin-top: 1rem;
+}
+.card .card-text .card-name {
+  opacity: 0.8;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.card .card-text .card-price {
+  font-weight: 700;
+}
+
+.list-card {
+  position: relative;
+  cursor: pointer;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.list-card .card-image {
+  position: relative;
+  background-color: var(--neutral-color);
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 300px;
+  overflow: hidden;
+}
+.list-card .card-image .hot {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--bg-color);
+  background-color: var(--text-color);
+  padding: 10px 5px;
+  opacity: 0.6;
+  border-radius: 100%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.list-card .card-image img {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.1);
+}
+.list-card .card-image .action-btns {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.list-card .card-image .action-btns div {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: var(--text-color);
+  opacity: 0.8;
+  cursor: pointer;
+}
+.list-card .card-image .action-btns div:hover {
+  opacity: 1;
+}
+.list-card .card-image:not(:hover) .action-btns {
+  opacity: 0;
+}
+.list-card .card-image:not(:hover) .preview {
+  transform: translateY(50%);
+}
+.list-card .card-image:not(:hover) img {
+  transform: scale(1);
+}
+.list-card .card-text {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (max-width: 600px) {
+  .list-card .card-text {
+    margin-top: 0px;
+  }
+}
+.list-card .card-text .card-name {
+  opacity: 0.8;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+.list-card .card-text .card-price {
+  font-weight: 700;
+  opacity: 0.6;
+}
+.list-card .text {
+  color: var(--text-color-light);
+}
+.list-card .bottom {
+  display: flex;
+  gap: 1rem;
+  font-weight: 700;
+  align-items: center;
+  opacity: 0.8;
+}
+.list-card .bottom div {
+  border: 0.1px solid #dcdcdc;
+  border-radius: 50px;
+  padding: 15px 23px;
+  font-size: 0.8rem;
+  color: var(--text-color-light);
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .list-card .bottom div {
+    padding: 9px 10px;
+    border-radius: 10px;
+  }
+}
+
+.top-card:not(:hover) .action-btns {
+  opacity: 0;
+}
+.top-card:not(:hover) .action-btns .preview {
+  transform: translateY(50%);
+}
+.top-card:not(:hover) img {
+  transform: scale(1);
+}
+.top-card .card-text {
+  margin-top: 0rem;
+  width: 100%;
+}
+.top-card .card-text .card-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+.top-card .card-text .card-price {
+  color: var(--text-color-light);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.top-card .card-image {
+  width: 100%;
+  max-width: 150px;
+  overflow: hidden;
+}
+.top-card .bottom .number {
+  border: 1px solid var(--neutral-color);
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+}
+.top-card .bottom .number span {
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.top-card .bottom .number input {
+  max-width: 40px;
+  outline: none;
+  border: none;
+  text-align: center;
+}
+.top-card .bottom .add-to-cart {
+  font-size: 0.8rem;
+  padding: 5px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.cart-card {
+  gap: 0.5rem;
+}
+.cart-card .card-image {
+  max-width: 80px;
+}
+.cart-card .card-text {
+  gap: 0.2rem;
+}/*# sourceMappingURL=card.css.map */

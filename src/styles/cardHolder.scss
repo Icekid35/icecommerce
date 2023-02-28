@@ -1,0 +1,22 @@
+.cards-holder{
+    display:grid;
+    grid-gap:1rem;
+    margin:10vmin;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+
+}
+.list-cards-holder{
+    display:grid;
+    grid-gap:1rem;
+    margin:10vmin 3vmin;
+    grid-template-columns: repeat(auto-fit,minmax(420px,1fr));
+
+}
+
+@media (max-width:500px) {
+    .list-cards-holder{
+    grid-template-columns: repeat(auto-fit,minmax(95vw,1fr));
+    margin: 10vmin 0px;
+
+    }
+}
