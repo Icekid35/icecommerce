@@ -1,3 +1,4 @@
+import { appName } from '../base'
 import '../styles/footer.css'
 
 
@@ -98,7 +99,7 @@ export default function Footer() {
               </div>
               </footer>
               <div className="copywrite">
-              Copyright © HasTech 2022 . All Right Reserved.
+              Copyright © {appName} 2022 . All Right Reserved.
           </div>
       </>
   )

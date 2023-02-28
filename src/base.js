@@ -5,6 +5,6 @@ export const color = {
     bgcolor:"#fff",
     primarycolor:"#03BFFD",
 }
-export default base = {
-    color
-}
+
+
+export const appName="Iceshop"

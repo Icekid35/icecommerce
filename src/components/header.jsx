@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import { appName } from '../base'
 import '../styles/header.css'
 import CartPopup from './cart-popup'
 
@@ -29,7 +30,7 @@ export default function Header() {
           </div>}
           <div className="header">
               <div className="section1">
-                  <div className="logo">ezone</div>
+                  <div className="logo">{appName ?? "ezone"}</div>
                   <div className="sec1">
                       <Link  to="/">Home</Link>
                       <div href="#" className="pages">Pages

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Card, { ListCard, TopCard } from "../components/card";
 import CardHolder, { ListCardHolder } from "../components/cardHolder";
 import Title from "../components/title";
 import "../styles/shop.css";
 
 export default function Shop() {
+  const [listMode, setListMode] = useState(false);
+  function changeMode(MODE) {
+    setListMode(MODE == "list" ? true : false);
+  }
   return (
     <>
       <Title />
@@ -89,31 +93,38 @@ export default function Shop() {
             </div>
 
             <div className="choice">
-              <div className="box-mode"></div>
-              <div className="List-mode"></div>
+              <div className="box-mode" onClick={() => changeMode("box")}></div>
+              <div
+                className="List-mode"
+                onClick={() => changeMode("list")}
+              ></div>
             </div>
           </div>
           <>
-            {/* <CardHolder>
-            <Card name={"navyn bird print"} image={1} price={115.0} />
-            <Card name={"navyn bird print"} image={2} price={115.0} />
-            <Card name={"navyn bird print"} image={3} price={115.0} />
-            <Card name={"navyn bird print"} image={4} price={115.0} />
-            <Card name={"navyn bird print"} image={5} price={115.0} />
-            <Card name={"navyn bird print"} image={6} price={115.0} />
-            <Card name={"navyn bird print"} image={7} price={115.0} />
-            <Card name={"navyn bird print"} image={8} price={115.0} />
-          </CardHolder> */}
-            <ListCardHolder>
-              <ListCard name={"navyn bird print"} image={1} price={115.0} />
-              <ListCard name={"navyn bird print"} image={2} price={115.0} />
-              <ListCard name={"navyn bird print"} image={3} price={115.0} />
-              <ListCard name={"navyn bird print"} image={4} price={115.0} />
-              <ListCard name={"navyn bird print"} image={5} price={115.0} />
-              <ListCard name={"navyn bird print"} image={6} price={115.0} />
-              <ListCard name={"navyn bird print"} image={7} price={115.0} />
-              <ListCard name={"navyn bird print"} image={8} price={115.0} />
-            </ListCardHolder>
+            {listMode ? (
+              <ListCardHolder>
+                <ListCard name={"navyn bird print"} image={1} price={115.0} />
+                <ListCard name={"navyn bird print"} image={2} price={115.0} />
+                <ListCard name={"navyn bird print"} image={3} price={115.0} />
+                <ListCard name={"navyn bird print"} image={4} price={115.0} />
+                <ListCard name={"navyn bird print"} image={5} price={115.0} />
+                <ListCard name={"navyn bird print"} image={6} price={115.0} />
+                <ListCard name={"navyn bird print"} image={7} price={115.0} />
+                <ListCard name={"navyn bird print"} image={8} price={115.0} />
+              </ListCardHolder>
+            ) : (
+              <CardHolder>
+                <Card name={"navyn bird print"} image={1} price={115.0} />
+                <Card name={"navyn bird print"} image={2} price={115.0} />
+                <Card name={"navyn bird print"} image={3} price={115.0} />
+                <Card name={"navyn bird print"} image={4} price={115.0} />
+                <Card name={"navyn bird print"} image={5} price={115.0} />
+                <Card name={"navyn bird print"} image={6} price={115.0} />
+                <Card name={"navyn bird print"} image={7} price={115.0} />
+                <Card name={"navyn bird print"} image={8} price={115.0} />
+              </CardHolder>
+            )}
+
             <div className="shop-nav">
               <a href="#" className="prev">
                 &lt;
