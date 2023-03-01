@@ -188,22 +188,23 @@
   gap: 1rem;
   margin: 4rem 0rem;
 }
-.shop-nav a {
+.shop-nav div {
   color: var(--text-color-light);
   background-color: var(--neutral-color);
   text-decoration: none;
   padding: 10px 15px;
   font-weight: 500;
+  cursor: pointer;
 }
-.shop-nav a:hover {
+.shop-nav div:hover {
   background-color: var(--text-color);
   color: var(--bg-color);
 }
-.shop-nav .prev, .shop-nav .next {
+.shop-nav .prev, .shop-nav .next, .shop-nav .present {
   color: var(--neutral-color);
   background-color: var(--text-color-light);
 }
-.shop-nav .prev:hover, .shop-nav .next:hover {
+.shop-nav .prev:hover, .shop-nav .next:hover, .shop-nav .present:hover {
   background-color: var(--text-color);
   color: var(--bg-color);
 }

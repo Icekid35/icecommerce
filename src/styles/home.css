@@ -154,20 +154,7 @@
 h2 {
   text-align: center;
   font-size: 1.5rem;
-}
-h2::before {
-  content: "_______";
-  min-width: 1rem;
-  height: 2px;
-  font-weight: bolder;
-  padding: 3px;
-}
-h2::after {
-  content: "_______";
-  min-width: 1rem;
-  height: 2px;
-  padding: 3px;
-  font-weight: bolder;
+  text-transform: capitalize;
 }
 
 .advert {

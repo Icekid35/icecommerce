@@ -207,19 +207,20 @@ cursor: pointer;
     justify-content: center;
     gap:1rem;
     margin: 4rem 0rem;
-    a{
+    div{
 color:var(--text-color-light);
 background-color: var(--neutral-color);
 text-decoration: none;
 padding:10px 15px;
 font-weight: 500;
+cursor: pointer;
 &:hover{
     background-color: var(--text-color);
     color:var(--bg-color)
 
 }
     }
-    .prev,.next{
+    .prev,.next,.present{
 color:var(--neutral-color);
 background-color: var(--text-color-light);
 &:hover{

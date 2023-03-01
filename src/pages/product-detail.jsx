@@ -1,12 +1,18 @@
 import Title from "../components/title";
 import "../styles/product-detail.css";
+import {useEffect} from 'react'
 
 export default function ProductDetail() {
+  useEffect(() => {
+    document
+      .getElementById("product-detail-page")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   return (
     <>
       <Title name={"PRODUCT DETAIL"} link={"HOME / PRODUCT DETAIL"} />
 
-      <div className="product-detail">
+      <div className="product-detail" id='product-detail-page'>
         <div className="sec1">
           <img
             src={require("../assets/products/1.webp")}

@@ -4,6 +4,7 @@ import Card, { CartCard } from "../components/card";
 import CardHolder from "../components/cardHolder";
 import Footer from "../components/footer";
 import "../styles/home.css";
+import fake from '../assets/fake.json'
 import { useState } from "react";
 import CartPopup from "../components/cart-popup";
 // import Swiper core and required modules
@@ -89,18 +90,15 @@ export default function Home() {
     <>
       <Banner />
 
-      <h2 className="">Featured product</h2>
-
+      <h2 className="">New product</h2>
       <CardHolder>
-        <Card name={"navyn bird print"} image={1} price={115.0} />
-        <Card name={"navyn bird print"} image={2} price={115.0} />
-        <Card name={"navyn bird print"} image={3} price={115.0} />
-        <Card name={"navyn bird print"} image={4} price={115.0} />
-        <Card name={"navyn bird print"} image={5} price={115.0} />
-        <Card name={"navyn bird print"} image={6} price={115.0} />
-        <Card name={"navyn bird print"} image={7} price={115.0} />
-        <Card name={"navyn bird print"} image={8} price={115.0} />
-      </CardHolder>
+      {
+        fake.sort((a, b) => b.creationAt - a.creationAt).splice(0, 10).map((product) => (
+          
+          <Card product={product} />
+        ))
+}
+         </CardHolder>
 
       <div className="advert">
         <img src={require("../assets/bg/35.jpg")} alt="" />

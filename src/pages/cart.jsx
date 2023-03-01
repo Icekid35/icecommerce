@@ -1,4 +1,5 @@
 import Title from "../components/title";
+import {useEffect} from 'react'
 import "../styles/cart.css";
 
 function Tbody({ image, name, price, quantity }) {
@@ -12,7 +13,7 @@ function Tbody({ image, name, price, quantity }) {
         <td>{name}</td>
         <td>${price}</td>
         <td>
-          <input type="number" min={1} value={quantity} />
+          <input type="number" min={1} defaultValue={quantity} />
         </td>
         <td>${price * quantity}</td>
       </tr>
@@ -20,10 +21,15 @@ function Tbody({ image, name, price, quantity }) {
   );
 }
 export default function Cart() {
+  useEffect(() => {
+    document
+      .getElementById("cart-page")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   return (
     <>
       <Title name={"CART"} link="HOME / CART" />
-      <form className="cart-page">
+      <form className="cart-page" id="cart-page">
         <h1>CART</h1>
         <table>
           <thead>

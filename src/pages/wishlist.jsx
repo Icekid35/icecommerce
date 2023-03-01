@@ -1,7 +1,8 @@
 import Title from "../components/title";
 import "../styles/cart.css";
+import {useEffect} from 'react'
 
-function Tbody({ image, name, price, quantity }) {
+function TbodyW({ image, name, price, quantity }) {
   return (
     <>
       <tr>
@@ -11,19 +12,21 @@ function Tbody({ image, name, price, quantity }) {
         </td>
         <td>{name}</td>
         <td>${price}</td>
-        <td>
-          <input type="number" min={1} value={quantity} />
-        </td>
-        <td>${price * quantity}</td>
+
       </tr>
     </>
   );
 }
 export default function Wishlist() {
+  useEffect(() => {
+    document
+      .getElementById("wishlist-page")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   return (
     <>
       <Title name={"WISHLIST"} link="HOME / WISHLIST" />
-      <div className="cart-page">
+      <div className="cart-page" id='wishlist-page'>
         <h1>WISHLIST</h1>
         <table>
           <thead>
@@ -32,15 +35,13 @@ export default function Wishlist() {
               <th>images</th>
               <th>product</th>
               <th>price</th>
-              <th>quantity</th>
-              <th>total</th>
             </tr>
           </thead>
           <tbody>
-            <Tbody image={1} name={"pink guchhi"} price={165.0} quantity={1} />
-            <Tbody image={2} name={"pink guchhi"} price={105.0} quantity={2} />
-            <Tbody image={3} name={"gold guchhi"} price={265.0} quantity={2} />
-            <Tbody image={4} name={"pink gaza"} price={565.0} quantity={5} />
+            <TbodyW image={1} name={"pink guchhi"} price={165.0}  />
+            <TbodyW image={2} name={"pink guchhi"} price={105.0}  />
+            <TbodyW image={3} name={"gold guchhi"} price={265.0}  />
+            <TbodyW image={4} name={"pink gaza"} price={565.0}  />
           </tbody>
         </table>
       </div>
