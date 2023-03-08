@@ -65,6 +65,9 @@ background-color: var(--text-color);
 font-weight: 500;
 color: var(--text-color-light);
 text-transform: capitalize;
+&.is-active{
+    color:var(--text-color);
+}
 &:hover{
     color:var(--text-color);
     cursor:pointer;

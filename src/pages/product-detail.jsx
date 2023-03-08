@@ -1,13 +1,21 @@
 import Title from "../components/title";
 import "../styles/product-detail.css";
-import {useEffect} from 'react'
+import {useEffect,useContext} from 'react'
+import { useParams, } from "react-router-dom";
+import { DataContext } from "../controller/state";
 
 export default function ProductDetail() {
+  const { state, dispatch } = useContext(DataContext)
   useEffect(() => {
     document
-      .getElementById("product-detail-page")
+    .getElementById("product-detail-page")
       .scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+    });
+    const {id} = useParams()
+  const product = state.fake.find((item) => item.id == id)
+  console.log(state.fake.find((item) => item.id == id), product)
+  
+const {title,price,description,images}=product
   return (
     <>
       <Title name={"PRODUCT DETAIL"} link={"HOME / PRODUCT DETAIL"} />
@@ -20,20 +28,20 @@ export default function ProductDetail() {
             className="main-img"
           />
           <div>
+            {images.map(image => (
+              
             <img src={require("../assets/products/2.webp")} alt="" />
-            <img src={require("../assets/products/3.webp")} alt="" />
+            ))}
+            {/* <img src={require("../assets/products/3.webp")} alt="" />
             <img src={require("../assets/products/4.webp")} alt="" />
-            <img src={require("../assets/products/5.webp")} alt="" />
+            <img src={require("../assets/products/5.webp")} alt="" /> */}
           </div>
         </div>
         <div className="sec2">
-          <div className="name">pretty pink blouse</div>
-          <div className="price">$120.00</div>
+          <div className="name">{title}</div>
+          <div className="price">${price}</div>
           <div className="desc">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam neque
-            quis excepturi, natus perspiciatis tenetur blanditiis, modi porro
-            inventore aut quia omnis enim magnam eius reiciendis voluptatum
-            minima assumenda provident?
+           {description}
           </div>
           <div className="tools">
             <div className="title">color</div>

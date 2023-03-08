@@ -1,10 +1,13 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { appName } from '../base'
+import { DataContext } from '../controller/state'
 import '../styles/header.css'
 import CartPopup from './cart-popup'
 
 export default function Header() {
+  const { state, dispatch } = useContext(DataContext);
+
     const [menuActive, setMenuActive] = useState(false)
     const [scrollAssister, setscrollAssister] = useState(false)
     function scrollAssist(e) {
@@ -47,9 +50,9 @@ export default function Header() {
                   </div>
                  
           <div className="sec2">
-            
-                      <div className="cart" data-now={10}>
-                      <CartPopup />
+             
+                      <div className="cart"  data-now={state.cart.length }>
+                      <CartPopup state={state} dispatch={dispatch} />
                         
                       </div>
             <div className="menu-icon " onClick={()=>setMenuActive(!menuActive)}>

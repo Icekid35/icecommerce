@@ -63,6 +63,9 @@
   color: var(--text-color-light);
   text-transform: capitalize;
 }
+.shop .tools .categories .category.is-active {
+  color: var(--text-color);
+}
 .shop .tools .categories .category:hover {
   color: var(--text-color);
   cursor: pointer;

@@ -143,13 +143,14 @@ align-items: center;
                     display: flex;
                   justify-content: center;
                   align-items: center;
-                    padding: 01px 4px;
+                    padding: 01px 8px;
                     aspect-ratio: 1;
                     background-color: var(--text-color);
                     right: -50%;
                     top: -50%;
                     border-radius: 50%;
-                  }}
+                  }
+                }
             
                   .menu-icon{
                     width:35px;

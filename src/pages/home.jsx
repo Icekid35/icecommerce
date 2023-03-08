@@ -18,6 +18,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Banner() {
@@ -37,10 +38,10 @@ function Banner() {
           X
           {/* <FontAwesomeIcon  className="bg icon" icon={'home'}/> */}
         </div>
-        <a href="#">home</a>
-        <a href="#">shop</a>
-        <a href="#">about</a>
-        <a href="#">contact</a>
+        <Link to='/'>home</Link>
+        <Link to='/shop'>shop</Link>
+        <Link to='/about'>about</Link>
+        <Link to='/contact'>contact</Link>
       </div>
       <div className="banner">
         <header>

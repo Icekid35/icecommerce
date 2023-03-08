@@ -1,16 +1,29 @@
 import Title from "../components/title";
 import "../styles/cart.css";
-import {useEffect} from 'react'
+import {useEffect,useContext} from 'react'
+import { DataContext } from "../controller/state";
+import { Link } from "react-router-dom";
 
-function TbodyW({ image, name, price, quantity }) {
+function TbodyW({ dispatch, product }) {
+  const { images, title, price ,id}=product
   return (
     <>
       <tr>
-        <td>X</td>
+        <td onClick={()=>dispatch({type:"remove-from-wishlist",payload:product})}>X</td>
         <td>
-          <img src={require(`../assets/products/${image}.webp`)} />
+        <Link to={`/product/${id}`}>
+
+          <img src={/*images[0] */ require(`../assets/products/${1}.webp`)} />
+          </Link>
+       
         </td>
-        <td>{name}</td>
+        <td>
+        <Link to={`/product/${id}`}>
+          
+          {title}
+        </Link>
+          
+        </td>
         <td>${price}</td>
 
       </tr>
@@ -18,6 +31,7 @@ function TbodyW({ image, name, price, quantity }) {
   );
 }
 export default function Wishlist() {
+  const {state,dispatch}=useContext(DataContext)
   useEffect(() => {
     document
       .getElementById("wishlist-page")
@@ -38,10 +52,13 @@ export default function Wishlist() {
             </tr>
           </thead>
           <tbody>
-            <TbodyW image={1} name={"pink guchhi"} price={165.0}  />
-            <TbodyW image={2} name={"pink guchhi"} price={105.0}  />
+            {state.wishlist.length <1 ?<h1>YOUR WISHLIST IS EMPTY</h1> :state.wishlist.map(product => (
+              
+            <TbodyW product={product} dispatch={dispatch}  />
+            ))}
+            {/* <TbodyW image={2} name={"pink guchhi"} price={105.0}  />
             <TbodyW image={3} name={"gold guchhi"} price={265.0}  />
-            <TbodyW image={4} name={"pink gaza"} price={565.0}  />
+            <TbodyW image={4} name={"pink gaza"} price={565.0}  /> */}
           </tbody>
         </table>
       </div>

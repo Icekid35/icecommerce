@@ -273,6 +273,8 @@ width:100%;
 
 .cart-card{
     gap: .5rem;
+    grid-template-columns: auto 1fr;
+    margin:0px;
     .card-image{
         max-width: 80px;
     }
