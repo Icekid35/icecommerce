@@ -1,10 +1,9 @@
-import {useEffect} from 'react'
+import { useEffect, useContext } from "react";
 
 import Card, { CartCard } from "../components/card";
 import CardHolder from "../components/cardHolder";
 import Footer from "../components/footer";
 import "../styles/home.css";
-import fake from '../assets/fake.json'
 import { useState } from "react";
 import CartPopup from "../components/cart-popup";
 // import Swiper core and required modules
@@ -17,12 +16,25 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
-import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { DataContext } from "../controller/state";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faShop,
+  faTimes,
+  faIdCard,
+  faSignIn,
+  faDoorOpen,
+  faCartShopping,
+  faHeadset,
+} from "@fortawesome/free-solid-svg-icons";
+import { appName } from "../base";
 
-function Banner() {
+function Banner({ state, dispatch }) {
   const [showMenu, setShowMenu] = useState(false);
+
   return (
     <>
       <div
@@ -35,25 +47,41 @@ function Banner() {
             setShowMenu(!showMenu);
           }}
         >
-          X
-          {/* <FontAwesomeIcon  className="bg icon" icon={'home'}/> */}
+          <FontAwesomeIcon className="bg icon" icon={faTimes} />
         </div>
-        <Link to='/'>home</Link>
-        <Link to='/shop'>shop</Link>
-        <Link to='/about'>about</Link>
-        <Link to='/contact'>contact</Link>
+        <Link to="/">
+          <FontAwesomeIcon icon={faHome} /> home
+        </Link>
+        <Link to="/shop">
+          <FontAwesomeIcon icon={faShop} /> shop
+        </Link>
+        <Link to="/about">
+          <FontAwesomeIcon icon={faIdCard} /> about
+        </Link>
+        <Link to="/contact">
+          <FontAwesomeIcon icon={faHeadset} /> contact
+        </Link>
       </div>
       <div className="banner">
         <header>
-          <div className="logo">ezone</div>
+          <div className="logo">{appName}</div>
           <div className="sec2">
             <div className="logreg">
-              <div className="login">LOGIN</div>
-              <div className="reg">| REG</div>
+              <Link to="/login" className="login">
+                {" "}
+                <FontAwesomeIcon icon={faSignIn} />
+                LOGIN
+              </Link>
+              |
+              <Link to="/register" className="reg">
+                <FontAwesomeIcon icon={faDoorOpen} />
+                REG
+              </Link>
             </div>
-            <div className="cart" data-now={10}>
+            <div className="cart" data-now={state.user.cart.length}>
               {/* <CartCard /> */}
-              <CartPopup />
+              <FontAwesomeIcon icon={faCartShopping} size={"2x"} />
+              <CartPopup state={state} dispatch={dispatch} />
             </div>
           </div>
         </header>
@@ -79,33 +107,35 @@ function Banner() {
 }
 
 export default function Home() {
+  const { state, dispatch } = useContext(DataContext);
+  const [runOnce] = useState();
   useEffect(() => {
-    toast.success('Welcome ')
-  
-    return () => {
-      
-    }
-  }, )
-  
+    toast.success("Welcome ");
+
+    return () => {};
+  }, [runOnce]);
+
   return (
     <>
-      <Banner />
+      <Banner state={state} dispatch={dispatch} />
 
       <h2 className="">New product</h2>
       <CardHolder>
-      {
-        fake.sort((a, b) => b.creationAt - a.creationAt).splice(0, 10).map((product) => (
-          
-          <Card product={product} />
-        ))
-}
-         </CardHolder>
+        {state.fake
+          .slice()
+          .splice(0, 10)
+          .map((product) => (
+            <Card product={product} dispatch={dispatch} />
+          ))}
+      </CardHolder>
 
       <div className="advert">
         <img src={require("../assets/bg/35.jpg")} alt="" />
         <div className="advert-text">
           20% off for women collection
-          <div className="action-btn hoverable">SHOP NOW</div>{" "}
+          <div className="action-btn hoverable">            <Link to='/shop'>SHOP NOW {' '}
+            <FontAwesomeIcon icon={faCartShopping} />
+            </Link>{" "}</div>{" "}
         </div>
       </div>
 
@@ -144,8 +174,7 @@ export default function Home() {
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
+           
             autoplay={{ duration: 500 }}
             grabCursor={true}
             loop={true}
@@ -195,9 +224,8 @@ export default function Home() {
         <div className="slider">
           <Swiper
             slidesPerView={3}
-            onSlideChange={() => console.log(window.innerWidth)}
+          
             grabCursor={true}
-            
             modules={[Navigation]}
             navigation
           >

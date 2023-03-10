@@ -62,7 +62,10 @@ transform: translateX(-50%);
                 border-radius: 100%;
                 background-color: var(--text-color);
                 opacity:.8;
+                color:var(--bg-color);
                 cursor: pointer;
+                display:grid;
+                place-items:center;
                 &:hover{
                     opacity:1;
                 }
@@ -140,6 +143,9 @@ img{
         background-color: var(--text-color);
         opacity:.8;
         cursor: pointer;
+        color:var(--bg-color);
+        display:grid;
+        place-items:center;
         &:hover{
             opacity: 1;
         }
@@ -198,10 +204,11 @@ opacity: .6;
         div{
 border: .1px solid #dcdcdc;
 border-radius: 50px;
-padding:15px 23px;
+padding:15px 20px;
 font-size: .8rem;
 color: var(--text-color-light);
 font-weight: 700;
+white-space: nowrap;
 @media (max-width:600px) {
     padding:9px 10px;
     border-radius: 10px;

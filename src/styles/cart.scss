@@ -79,6 +79,10 @@ padding: 1rem;
         background-color: var(--text-color);
         color:var(--bg-color);
 text-transform: uppercase;
+cursor:pointer;
+display: flex;
+gap:5px;
+align-items: flex-end;
 &:hover{
     filter: brightness(.7);
 }

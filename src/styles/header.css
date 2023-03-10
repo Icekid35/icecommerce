@@ -6,6 +6,7 @@
   right: clamp(10px, 5%, 1rem);
   bottom: 10%;
   border: 1px solid var(--bg-color);
+  z-index: 100;
 }
 .to-top:hover {
   filter: invert(1);
@@ -69,6 +70,8 @@
 }
 .header .section1 .sec1 .pages .pages-overlay a {
   cursor: pointer;
+  display: flex;
+  gap: 3px;
 }
 .header .section1 .sec1 .pages .pages-overlay a:hover::after {
   width: 0%;
@@ -84,6 +87,9 @@
   font-weight: 700;
   text-transform: capitalize;
   position: relative;
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
 }
 .header .section1 .sec1 a::after {
   content: "";
@@ -108,9 +114,9 @@
 .header .section1 .sec2 .cart {
   width: 30px;
   height: 30px;
-  background-color: var(--text-color);
   position: relative;
   margin-right: 1rem;
+  cursor: pointer;
 }
 .header .section1 .sec2 .cart:not(:hover) .cart-popup {
   opacity: 0;
@@ -148,14 +154,10 @@
   border-radius: 5px;
 }
 .header .mobile-menu {
-  display: flex;
   gap: 2rem;
   justify-content: space-around;
   padding: 2rem 1rem;
   border-top: 1px solid var(--text-color-light);
-}
-.header .mobile-menu:not(.active) {
-  opacity: 0;
   display: none;
 }
 .header .mobile-menu .pages {
@@ -186,6 +188,7 @@
 }
 .header .mobile-menu .pages .pages-overlay a {
   cursor: pointer;
+  white-space: nowrap;
 }
 .header .mobile-menu .pages .pages-overlay a:hover::after {
   width: 0%;
@@ -233,9 +236,6 @@
   gap: 0.3rem;
   color: var(--text-color-light);
 }
-.header .section2 div:last-of-type {
-  border-right: none;
-}
 .header .section2 .access a {
   text-transform: uppercase;
   font-weight: 700;
@@ -260,24 +260,46 @@
   outline: none;
   font-size: 1.1rem;
 }
-.header .section2 .search span {
-  width: 30px;
-  height: 30px;
-  background-color: var(--text-color);
+.header .section2 .search svg {
+  color: var(--text-color);
   cursor: pointer;
 }
-.header .section2 .search span:hover {
-  background-color: var(--text-color-light);
+.header .section2 .search svg:hover {
+  color: var(--text-color-light);
 }
 .header .section2 .wishlist {
   cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  gap: 5px;
+  text-transform: capitalize;
+  padding: 1rem;
+  justify-content: center;
+  color: var(--text-color-light);
+  border-right: none;
 }
-@media (max-width: 600px) {
+.header .section2 .wishlist:hover {
+  color: var(--text-color);
+}
+
+@media (max-width: 800px) {
   .header .section1 .sec1 {
     display: none;
   }
   .header .section1 .sec2 .menu-icon {
     display: flex;
+  }
+  .header .mobile-menu.active {
+    display: flex;
+    animation: enter 0.3s linear;
+    transform-origin: top;
+  }
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: scaleY(0);
+    }
   }
   .header .section2 {
     flex-direction: column;

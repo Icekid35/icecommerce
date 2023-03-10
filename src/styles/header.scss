@@ -6,6 +6,7 @@
    right: clamp(10px,5%,1rem);
    bottom: 10%;
    border: 1px solid var(--bg-color);
+   z-index:100;
    &:hover{
     filter: invert(1);
     cursor: pointer;
@@ -69,6 +70,8 @@ pointer-events: none;
                     pointer-events: all;
                     a{
                         cursor: pointer;
+                       display:flex;
+                       gap:3px;
                         &:hover{
                             &::after{
                                 width:0%;
@@ -91,7 +94,9 @@ pointer-events: none;
                 font-weight: 700;
                 text-transform: capitalize;
                 position: relative;
-              
+                display:flex;
+                gap:3px;
+                align-items: flex-end;
                 &::after{
                     content:'';
                    transform-origin: center center;
@@ -125,9 +130,9 @@ align-items: center;
             .cart {
                 width: 30px;
                 height: 30px;
-                background-color: var(--text-color);
                 position: relative;
                 margin-right: 1rem;
+                cursor:pointer;
                 &:not(:hover){
 .cart-popup{
     opacity: 0;
@@ -174,16 +179,13 @@ align-items: center;
         }
     }
     .mobile-menu{
-        display: flex;
+        // display: flex;
         // width:100%;
         gap:2rem;
         justify-content: space-around;
         padding: 2rem 1rem;
         border-top: 1px solid var(--text-color-light);
-        &:not(.active){
-            opacity: 0;
-            display: none;
-        }
+       display:none;
         .pages{
             text-decoration: none;
             color:inherit;
@@ -214,6 +216,7 @@ align-items: center;
                 // pointer-events: all;
                 a{
                     cursor: pointer;
+                    white-space: nowrap;
                     &:hover{
                         &::after{
                             width:0%;
@@ -271,10 +274,8 @@ display: flex;
 justify-content: center;
 gap:.3rem;
 color:var(--text-color-light);
-&:last-of-type{
-border-right:none;
 
-}
+
         }
         .access{
             a{
@@ -304,13 +305,12 @@ width:100%;
 
 font-size: 1.1rem;            
 }
-            span{
-                width: 30px;
-                height: 30px;
-                background-color: var(--text-color);
+            svg{
+               
+                color: var(--text-color);
                 cursor: pointer;
                 &:hover{
-                    background-color: var(--text-color-light);
+                    color: var(--text-color-light);
 
                 }
 
@@ -318,15 +318,25 @@ font-size: 1.1rem;
         }
         .wishlist{
             cursor: pointer;
-            .heart{
+           display:flex;
+           align-items: flex-end;
+           text-decoration: none;
+           gap:5px;
+           text-transform:capitalize;
+padding:1rem ;
+justify-content: center;
+color:var(--text-color-light);
+border-right:none;
+&:hover{
+    color:var(--text-color);
 
-           }
+}
         }
     }
 }
 
 
-@media (max-width:600px){
+@media (max-width:800px){
 .header{
     .section1{
         .sec1{
@@ -337,6 +347,20 @@ font-size: 1.1rem;
         .sec2{
             .menu-icon{
                 display: flex;
+            }
+        }
+    }
+    .mobile-menu{
+        // display: flex;
+        &.active{
+            display: flex;
+            animation :enter .3s linear ;
+            transform-origin: top ;
+            @keyframes enter{
+                from{
+                    opacity:0;
+                    transform:scaleY(0)
+                }
             }
         }
     }

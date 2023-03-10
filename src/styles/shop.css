@@ -32,6 +32,9 @@
   width: 35px;
   height: 35px;
   background-color: var(--text-color);
+  color: var(--bg-color);
+  display: grid;
+  place-items: center;
   opacity: 0.7;
   cursor: pointer;
 }
@@ -171,10 +174,8 @@
   padding-right: 1rem;
   justify-content: flex-end;
 }
-.shop .shop-top-section .choice div {
-  background-color: var(--text-color);
-  width: 30px;
-  height: 30px;
+.shop .shop-top-section .choice svg {
+  color: var(--text-color);
   cursor: pointer;
 }
 

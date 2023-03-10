@@ -1,36 +1,76 @@
-import React, { useState, useEffect, useRef,useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Card, { ListCard, TopCard } from "../components/card";
 import CardHolder, { ListCardHolder } from "../components/cardHolder";
 import Title from "../components/title";
 import "../styles/shop.css";
 // import fake from "../assets/fake.json";
 import { DataContext } from "../controller/state";
+import { useSearchParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faList,
+  faSearch,
+  faTh,
+  faThLarge,
+  faThList,
+} from "@fortawesome/free-solid-svg-icons";
 
 const productsPerPage = 30;
+
 export default function Shop() {
-  const {state,dispatch}=useContext(DataContext)
-  const {fake}=state
+  const { state, dispatch } = useContext(DataContext);
+  const { fake } = state;
+
+  // Products state and displayProducts state will be used in pagination.
   const [products, setProducts] = useState(fake.slice());
   const [displayProducts, setDisplayProducts] = useState(fake.slice());
 
+  // The initial data slice for pagination
   const [data, setData] = useState(products.slice().splice(0, productsPerPage));
+
+  // The current batch
   const [batch, setBatch] = useState(0);
+
+  // The search term
   const [searchTerm, setSearchTerm] = useState("");
+
+  // The currently active category
   const [activeCategory, setActiveCategory] = useState("all");
+
+  // The list of unique categories in the products data
   const [categories, _] = useState(
     new Array(
       ...new Set(fake.slice().map((product) => product.category.name))
     ).sort()
   );
+
+  // The search bar reference
   const searchRef = useRef(null);
+
+  // The URL search params
+  const [query, setQueries] = useSearchParams();
+
+  // Set the search query param when the search term is updated
+  useEffect(() => {
+    if (searchTerm.length >= 1) {
+      setQueries({ search: searchTerm });
+    }
+  }, [searchTerm]);
+
+  // Update the search term when the URL search param changes
+  useEffect(() => {
+    if (query.get("search") && query.get("search") !== searchTerm) {
+      setSearchTerm(query.get("search"));
+    }
+  }, []);
+
+  // Search for products when the search button is clicked
   function Search() {
     setSearchTerm(searchRef.current.value);
   }
-  function switchCategory(choice, e) {
-    // if (e.target.classList.contains('is-active')) {
-    //   choice = 'all'
 
-    // }
+  // Filter products by category when a category is clicked
+  function switchCategory(choice, e) {
     let catChoice;
     switch (choice) {
       case "all":
@@ -46,24 +86,21 @@ export default function Shop() {
         }
         catChoice = fake
           .slice()
-          .filter((product) => product.category.name == choice);
+          .filter((product) => product.category.name === choice);
         setProducts(catChoice);
         customBatch(0, catChoice);
         setActiveCategory(choice);
-
         break;
     }
-    // const otherElement = document.querySelectorAll('.category')
-    // otherElement.forEach((element) => {
-    //   element.classList.remove('is-active')
-    // })
-    // e.target.classList.toggle('is-active')
   }
 
+  // Go to the next page of products
   function nextBatch() {
     const productsCopy = displayProducts.slice();
     const maxBatch = Math.round(displayProducts.length / productsPerPage + 0.5);
+
     if (batch >= maxBatch - 1) return;
+
     const next =
       batch == maxBatch
         ? displayProducts.length - 1 - (batch + 1) * productsPerPage
@@ -73,6 +110,7 @@ export default function Shop() {
     setBatch(batch + 1);
   }
 
+  // Go to the previous page of products
   function prevBatch() {
     const productsCopy = displayProducts.slice();
 
@@ -88,7 +126,7 @@ export default function Shop() {
       displayProducts.length < productsPerPage
         ? displayProducts.length
         : Math.round(displayProducts.length / productsPerPage + 0.5);
-    if (num > maxBatch - 1 || num < 0) return console.log(num, maxBatch);
+    if (num > maxBatch - 1 || num < 0) return ;
     setBatch(num);
 
     const next =
@@ -164,9 +202,7 @@ export default function Shop() {
     setListMode(MODE == "list" ? true : false);
   }
 
-  useEffect(() => {
-
-  });
+  useEffect(() => {});
   const [priceRange, setPriceRange] = useState(1);
   useEffect(() => {
     const newP = products
@@ -179,10 +215,9 @@ export default function Shop() {
     // switchCategory(activeCategory)
     reSort(undefined, newP);
     document
-    .getElementById("shop-page")
-    .scrollIntoView({ behavior: "smooth", block: "start" });
+      .getElementById("shop-page")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
     return () => {};
-
   }, [priceRange, activeCategory, searchTerm]);
   return (
     <>
@@ -198,7 +233,9 @@ export default function Shop() {
               value={searchTerm}
               onChange={Search}
             />
-            <span className="action" onClick={Search}></span>
+            <span className="action" onClick={Search}>
+              <FontAwesomeIcon icon={faSearch} />
+            </span>
           </div>
           <div className="title">Filter By Price</div>
 
@@ -311,11 +348,18 @@ export default function Shop() {
             </div>
 
             <div className="choice">
-              <div className="box-mode" onClick={() => changeMode("box")}></div>
-              <div
+              <FontAwesomeIcon
+                className="box-mode"
+                size={"lg"}
+                icon={faThLarge}
+                onClick={() => changeMode("box")}
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
                 className="List-mode"
                 onClick={() => changeMode("list")}
-              ></div>
+                icon={faList}
+                size={"lg"}
+              ></FontAwesomeIcon>
             </div>
           </div>
           <>

@@ -53,6 +53,10 @@ footer .grid .searchbar .action {
   height: 35px;
   background-color: var(--text-color);
   opacity: 0.7;
+  color: var(--bg-color);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 }
 
 .copywrite {

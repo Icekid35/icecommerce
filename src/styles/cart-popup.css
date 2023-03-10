@@ -50,6 +50,9 @@
 .cart-popup .action-btns .empty-cart {
   color: var(--text-color);
   background-color: var(--bg-color);
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
 }
 .cart-popup .action-btns .empty-cart:hover {
   color: var(--bg-color);
@@ -58,6 +61,9 @@
 .cart-popup .action-btns .checkout {
   background-color: var(--text-color);
   color: var(--bg-color);
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
 }
 .cart-popup .action-btns .checkout:hover {
   filter: brightness(2);

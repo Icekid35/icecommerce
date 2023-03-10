@@ -32,6 +32,9 @@ background-color: transparent;
             width: 35px;
             height: 35px;
             background-color: var(--text-color);
+            color:var(--bg-color);
+            display:grid;
+            place-items: center;
             opacity: .7;
             cursor:pointer;
             &:hover{
@@ -184,10 +187,10 @@ cursor: pointer;
         // width: 100%;
         padding-right: 1rem;
         justify-content: flex-end;
-        div{
-            background-color: var(--text-color);
-            width:30px;
-            height: 30px;
+        svg{
+           color: var(--text-color);
+            // width:30px;
+            // height: 30px;
             cursor: pointer;
         }
     }

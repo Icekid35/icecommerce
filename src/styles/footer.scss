@@ -59,6 +59,10 @@ footer{
                     height: 35px;
                     background-color: var(--text-color);
                     opacity: .7;
+                    color:var(--bg-color);
+                    display: grid;
+                    place-items: center;
+                    cursor: pointer;
                 }
             }
         }

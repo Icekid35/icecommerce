@@ -83,6 +83,10 @@
   background-color: var(--text-color);
   color: var(--bg-color);
   text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
 }
 .cart-page .btn:hover {
   filter: brightness(0.7);
