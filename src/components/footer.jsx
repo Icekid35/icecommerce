@@ -4,14 +4,14 @@ import "../styles/footer.css";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeadset, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faHeadset, faMailForward, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function Footer() {
   const { state, dispatch } = useContext(DataContext);
-  const { fake } = state;
+  const { shopProducts } = state;
   const [categories, _] = useState(
     new Array(
-      ...new Set(fake.slice().map((product) => product.category.name))
+      ...new Set(shopProducts.slice().map((product) => product.category.name))
     ).sort()
   );
 
@@ -88,7 +88,7 @@ export default function Footer() {
                 <input type="text" placeholder="Your Email" />
                 <span className="action">
                   {" "}
-                  <FontAwesomeIcon icon={faSearch} />
+                  <FontAwesomeIcon icon={faEnvelope} />
                 </span>
               </div>
             </li>

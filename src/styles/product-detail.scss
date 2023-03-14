@@ -153,6 +153,9 @@ padding: 10px 15px;
 border: 1px solid var(--text-color);
 border-radius: 10px;
 cursor: pointer;
+display: flex;
+gap:7px;
+align-items: flex-end;
     }
     .add{
 background-color: var(--text-color);

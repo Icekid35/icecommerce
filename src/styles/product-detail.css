@@ -153,6 +153,9 @@
   border: 1px solid var(--text-color);
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
+  gap: 7px;
+  align-items: flex-end;
 }
 .product-detail .sec2 .action .add {
   background-color: var(--text-color);

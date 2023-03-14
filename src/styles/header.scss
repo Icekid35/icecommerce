@@ -72,6 +72,7 @@ pointer-events: none;
                         cursor: pointer;
                        display:flex;
                        gap:3px;
+                       
                         &:hover{
                             &::after{
                                 width:0%;
@@ -133,6 +134,8 @@ align-items: center;
                 position: relative;
                 margin-right: 1rem;
                 cursor:pointer;
+                @media (max-width:600px) {
+                }
                 &:not(:hover){
 .cart-popup{
     opacity: 0;
@@ -193,6 +196,9 @@ align-items: center;
             font-weight: 700;
             text-transform: capitalize;
             position: relative;
+            display: flex;
+            flex-direction: column;
+ align-items: center;
             &:not(:hover) {
                 .pages-overlay{
                     opacity:0;
@@ -239,7 +245,9 @@ align-items: center;
             font-weight: 700;
             text-transform: capitalize;
             position: relative;
-           
+           display: flex;
+           flex-direction: column;
+align-items: center;
             &::after{
                 content:'';
                transform-origin: center center;

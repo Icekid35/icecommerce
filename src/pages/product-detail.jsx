@@ -6,6 +6,8 @@ import { DataContext } from "../controller/state";
 import { toast } from "react-hot-toast";
 import confetti from "canvas-confetti";
 import { color } from "../base";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const demoProduct = {
   title: "",
@@ -18,7 +20,7 @@ const demoProduct = {
 export default function ProductDetail() {
   const { state, dispatch } = useContext(DataContext);
   const { id } = useParams();
-  let product = state.fake.find((item) => item.id == id);
+  let product = state.shopProducts.find((item) => item.id == id);
   const redirect = useNavigate();
   if (!product) {
     product = demoProduct;
@@ -158,8 +160,9 @@ export default function ProductDetail() {
               </span>
             </div>
             <div
-              className="btn add"
+              className="btn add hoverable"
               onClick={(e) => {
+                if (state.user.cart?.find?.((item) => item.id == id)) return;
                 confetti({
                   particleCount: 100,
                   spread: 10,
@@ -187,12 +190,21 @@ export default function ProductDetail() {
                 );
               }}
             >
-              ADD TO CART
+              <FontAwesomeIcon icon={faCartPlus} />
+              {!state.user.cart?.find?.((item) => item.id == id)
+                ? " ADD TO CART"
+                : "ADDED TO CART"}
             </div>
             <div
-              className="heart btn"
-              onClick={(e) => addToWishlist(product, e)}
-            ></div>
+              className="heart btn hoverable"
+              onClick={(e) =>{
+                if (state.user.wishlist?.find?.((item) => item.id == id)) return;
+                
+                addToWishlist(product, e)
+              }}
+            >
+              <FontAwesomeIcon icon={faHeart} />
+            </div>
           </div>
 
           <div className="extra">

@@ -121,7 +121,7 @@ export default function Home() {
 
       <h2 className="">New product</h2>
       <CardHolder>
-        {state.fake
+        {state.shopProducts
           .slice()
           .splice(0, 10)
           .map((product) => (
@@ -133,9 +133,12 @@ export default function Home() {
         <img src={require("../assets/bg/35.jpg")} alt="" />
         <div className="advert-text">
           20% off for women collection
-          <div className="action-btn hoverable">            <Link to='/shop'>SHOP NOW {' '}
-            <FontAwesomeIcon icon={faCartShopping} />
-            </Link>{" "}</div>{" "}
+          <div className="action-btn hoverable">
+            {" "}
+            <Link to="/shop">
+              SHOP NOW <FontAwesomeIcon icon={faCartShopping} />
+            </Link>{" "}
+          </div>{" "}
         </div>
       </div>
 
@@ -174,7 +177,6 @@ export default function Home() {
           <Swiper
             spaceBetween={50}
             slidesPerView={1}
-           
             autoplay={{ duration: 500 }}
             grabCursor={true}
             loop={true}
@@ -224,7 +226,6 @@ export default function Home() {
         <div className="slider">
           <Swiper
             slidesPerView={3}
-          
             grabCursor={true}
             modules={[Navigation]}
             navigation

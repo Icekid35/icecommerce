@@ -9,6 +9,15 @@
   padding: 2rem 1rem;
   border: 1px solid var(--text-color);
   color: var(--text-color-light);
+  @media (max-width:600px) {
+    position:fixed;
+    // width:100%;
+    top:100px;
+    left:0px;
+    z-index: 100;
+    // height: 100vh;
+
+  }
   .title {
     font-weight: 700;
     text-transform: uppercase;
@@ -40,6 +49,7 @@
     font-weight: 600;
     text-transform: uppercase;
     margin-top: 1rem;
+
     div {
       padding: 10px;
       border: 1px solid var(--text-color);

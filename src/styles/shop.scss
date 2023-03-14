@@ -241,8 +241,11 @@ background-color: var(--text-color-light);
     .shop{
         display: flex;
         flex-direction: column-reverse;
-padding-left: 1rem;
+padding-left: 0rem;
+padding:0px;
+
 .tools{
+    padding:1rem;
 }
     }    
 }

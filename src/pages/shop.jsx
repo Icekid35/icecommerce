@@ -3,7 +3,7 @@ import Card, { ListCard, TopCard } from "../components/card";
 import CardHolder, { ListCardHolder } from "../components/cardHolder";
 import Title from "../components/title";
 import "../styles/shop.css";
-// import fake from "../assets/fake.json";
+// import shopProducts from "../assets/shopProducts.json";
 import { DataContext } from "../controller/state";
 import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,11 +19,11 @@ const productsPerPage = 30;
 
 export default function Shop() {
   const { state, dispatch } = useContext(DataContext);
-  const { fake } = state;
+  const { shopProducts } = state;
 
   // Products state and displayProducts state will be used in pagination.
-  const [products, setProducts] = useState(fake.slice());
-  const [displayProducts, setDisplayProducts] = useState(fake.slice());
+  const [products, setProducts] = useState(shopProducts.slice());
+  const [displayProducts, setDisplayProducts] = useState(shopProducts.slice());
 
   // The initial data slice for pagination
   const [data, setData] = useState(products.slice().splice(0, productsPerPage));
@@ -36,11 +36,11 @@ export default function Shop() {
 
   // The currently active category
   const [activeCategory, setActiveCategory] = useState("all");
-
+const [runOnce]=useState(null)
   // The list of unique categories in the products data
   const [categories, _] = useState(
     new Array(
-      ...new Set(fake.slice().map((product) => product.category.name))
+      ...new Set(shopProducts.slice().map((product) => product.category.name))
     ).sort()
   );
 
@@ -53,16 +53,20 @@ export default function Shop() {
   // Set the search query param when the search term is updated
   useEffect(() => {
     if (searchTerm.length >= 1) {
-      setQueries({ search: searchTerm });
+      setQueries({ search: searchTerm ,category:activeCategory});
     }
-  }, [searchTerm]);
+  }, [searchTerm,activeCategory]);
 
   // Update the search term when the URL search param changes
   useEffect(() => {
+    if (query.get("category")?.length>=1) {
+      switchCategory(query.get("category"));
+      
+    }
     if (query.get("search") && query.get("search") !== searchTerm) {
       setSearchTerm(query.get("search"));
     }
-  }, []);
+  }, [runOnce]);
 
   // Search for products when the search button is clicked
   function Search() {
@@ -74,7 +78,7 @@ export default function Shop() {
     let catChoice;
     switch (choice) {
       case "all":
-        catChoice = fake.slice();
+        catChoice = shopProducts.slice();
         setProducts(catChoice);
         customBatch(0, catChoice);
         setActiveCategory("all");
@@ -84,7 +88,7 @@ export default function Shop() {
         if (!choice in categories) {
           return;
         }
-        catChoice = fake
+        catChoice = shopProducts
           .slice()
           .filter((product) => product.category.name === choice);
         setProducts(catChoice);
@@ -126,7 +130,7 @@ export default function Shop() {
       displayProducts.length < productsPerPage
         ? displayProducts.length
         : Math.round(displayProducts.length / productsPerPage + 0.5);
-    if (num > maxBatch - 1 || num < 0) return ;
+    if (num > maxBatch - 1 || num < 0) return;
     setBatch(num);
 
     const next =
@@ -218,7 +222,7 @@ export default function Shop() {
       .getElementById("shop-page")
       .scrollIntoView({ behavior: "smooth", block: "start" });
     return () => {};
-  }, [priceRange, activeCategory, searchTerm]);
+  }, [priceRange, activeCategory, searchTerm,batch]);
   return (
     <>
       <Title />
@@ -230,8 +234,7 @@ export default function Shop() {
               type="text"
               placeholder="Search products"
               ref={searchRef}
-              value={searchTerm}
-              onChange={Search}
+              defaultValue={searchTerm}
             />
             <span className="action" onClick={Search}>
               <FontAwesomeIcon icon={faSearch} />
@@ -266,7 +269,7 @@ export default function Shop() {
               }`}
               onClick={(e) => switchCategory("all", e)}
             >
-              <span>All</span> <span>{fake.length}</span>
+              <span>All</span> <span>{shopProducts.length}</span>
             </div>
             {categories.map((category, index) => {
               return (
@@ -280,7 +283,7 @@ export default function Shop() {
                   <span>{category}</span>{" "}
                   <span>
                     {
-                      fake
+                      shopProducts
                         .slice()
                         .filter((product) => product.category.name == category)
                         .length

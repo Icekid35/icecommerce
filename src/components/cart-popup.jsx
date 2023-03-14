@@ -1,4 +1,4 @@
-import { faCartArrowDown, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCartArrowDown, faCross, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/cart-popup.css";
 import { CartCard } from "./card";
@@ -10,7 +10,7 @@ export default function CartPopup({ state, dispatch }) {
         <></>
       ) : (
         <div className="cart-popup">
-          <div className="title">Your Cart</div>
+            <div className="title">Your Cart</div>
           <div className="cards-band">
             {state.user.cart.map((product) => (
               <CartCard product={product} />
