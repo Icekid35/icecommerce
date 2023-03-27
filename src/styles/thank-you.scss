@@ -8,10 +8,15 @@
     h1{
         font-size: 3rem;
         text-transform: capitalize;
+        @media (max-width:600px) {
+            font-size:1rem;
+        }
     }
+
     .button{
         border-radius: 1rem;
         padding: 1rem 2rem;
+        text-decoration: none;
         background-color: var(--primary-color);
         color: var(--bg-color);
         font-weight: 700;

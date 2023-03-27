@@ -1,13 +1,15 @@
 .cart-page {
   margin: 5rem;
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .cart-page {
     margin: 5rem 0px;
+    padding: 10px;
   }
 }
 .cart-page h1 {
   font-weight: 400 !important;
+  padding: 10px;
 }
 .cart-page table {
   width: 100%;
@@ -87,6 +89,11 @@
   display: flex;
   gap: 5px;
   align-items: flex-end;
+}
+@media (max-width: 500px) {
+  .cart-page .btn {
+    font-size: 0.9rem;
+  }
 }
 .cart-page .btn:hover {
   filter: brightness(0.7);

@@ -22,6 +22,7 @@
 }
 .product-detail .sec1 .main-img {
   width: 80%;
+  background-color: var(--neutral-color);
 }
 .product-detail .sec1 div {
   margin-top: 1rem;
@@ -31,6 +32,7 @@
 }
 .product-detail .sec1 div img {
   max-width: 7.5vw;
+  background-color: var(--neutral-color);
 }
 @media (max-width: 600px) {
   .product-detail .sec1 div img {
@@ -89,30 +91,7 @@
   height: 20px;
   border-radius: 100%;
   cursor: pointer;
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(1) {
-  background-color: red;
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(8) {
-  background-color: rgb(255, 21, 138);
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(7) {
-  background-color: rgb(27, 30, 179);
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(6) {
-  background-color: rgb(247, 222, 4);
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(5) {
-  background-color: rgb(43, 214, 43);
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(4) {
-  background-color: rebeccapurple;
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(3) {
-  background-color: rgb(4, 255, 255);
-}
-.product-detail .sec2 .tools .colors span:nth-last-of-type(2) {
-  background-color: rgb(0, 0, 0);
+  border: 1px solid var(--neutral-color);
 }
 .product-detail .sec2 .tools .sizes {
   display: flex;
@@ -120,6 +99,9 @@
   font-weight: 700;
   cursor: pointer;
   color: var(--text-color-light);
+}
+.product-detail .sec2 .tools .sizes span {
+  padding: 3px;
 }
 .product-detail .sec2 .tools .sizes span:hover {
   color: var(--text-color);
@@ -160,6 +142,13 @@
 .product-detail .sec2 .action .add {
   background-color: var(--text-color);
   color: var(--bg-color);
+}
+@media (max-width: 500px) {
+  .product-detail .sec2 .action .add {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+  }
 }
 .product-detail .sec2 .extra {
   display: flex;

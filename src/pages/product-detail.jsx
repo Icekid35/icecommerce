@@ -17,8 +17,11 @@ const demoProduct = {
   category: {},
 };
 
+
 export default function ProductDetail() {
   const { state, dispatch } = useContext(DataContext);
+  const [selectedColor,setSelectedColor]=useState(null)
+  const [selectedSize,setSelectedSize]=useState(null)
   const { id } = useParams();
   let product = state.shopProducts.find((item) => item.id == id);
   const redirect = useNavigate();
@@ -30,7 +33,7 @@ export default function ProductDetail() {
       redirect("/shop");
     }
   });
-  const { title, price, description, images, category } = product;
+  const { title, price, description, images, category,colors=['red','black','white','blue','green','yellow'] } = product;
 
   const [bigImage, setBigImage] = useState(images[0]);
   useEffect(() => {
@@ -41,7 +44,7 @@ export default function ProductDetail() {
   function mutate(type) {
     switch (type) {
       case "increase":
-        dispatch({ type: "add-to-cart", payload: product });
+        dispatch({ type: "add-to-cart", payload: product,color:selectedColor,size:selectedSize });
         break;
       case "decrease":
         dispatch({ type: "decrease-cart", payload: product });
@@ -89,7 +92,7 @@ export default function ProductDetail() {
       <div className="product-detail" id="product-detail-page">
         <div className="sec1">
           <img
-            src={require("../assets/products/1.webp")}
+            src={bigImage}
             alt=""
             className="main-img"
           />
@@ -98,7 +101,7 @@ export default function ProductDetail() {
               <img
                 onClick={() => setBigImage(image)}
                 style={{ filter: image == bigImage ? ["brightness(.6)"] : [] }}
-                src={require("../assets/products/2.webp")}
+                src={image}
                 alt=""
               />
             ))}
@@ -114,22 +117,20 @@ export default function ProductDetail() {
           <div className="tools">
             <div className="title">color</div>
             <div className="colors">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+{
+                colors.map(color => {
+    return(
+      <span title={color} style={{backgroundColor:color,border:selectedColor!=color ? '1px solid var(--neutral-color)' : '1px solid var(--text-color)'}} onClick={()=>setSelectedColor(color)}></span>
+    )
+  })
+}            </div>
             <div className="title">size</div>
             <div className="sizes">
-              <span>XL</span>
-              <span>M</span>
-              <span>L</span>
-              <span>ML</span>
-              <span>LM</span>
+              <span style={{backgroundColor:'XL' !=selectedSize ?'': 'var(--neutral-color)'}}  title='extra large' onClick={()=>{setSelectedSize('XL')}}>XL</span>
+              <span style={{backgroundColor:'M' !=selectedSize ?'': 'var(--neutral-color)'}} title='medium' onClick={()=>{setSelectedSize('M')}}>M</span>
+              <span style={{backgroundColor:'L' !=selectedSize ?'': 'var(--neutral-color)'}} title='large' onClick={()=>{setSelectedSize('L')}}>L</span>
+              <span style={{backgroundColor:'ML' !=selectedSize ?'': 'var(--neutral-color)'}} title='ML' onClick={()=>{setSelectedSize('ML')}}>ML</span>
+              <span style={{backgroundColor:'LM' !=selectedSize ?'': 'var(--neutral-color)'}} title='LM' onClick={()=>{setSelectedSize('LM')}}>LM</span>
             </div>
           </div>
 
@@ -162,7 +163,6 @@ export default function ProductDetail() {
             <div
               className="btn add hoverable"
               onClick={(e) => {
-                if (state.user.cart?.find?.((item) => item.id == id)) return;
                 confetti({
                   particleCount: 100,
                   spread: 10,
@@ -191,9 +191,8 @@ export default function ProductDetail() {
               }}
             >
               <FontAwesomeIcon icon={faCartPlus} />
-              {!state.user.cart?.find?.((item) => item.id == id)
-                ? " ADD TO CART"
-                : "ADDED TO CART"}
+              ADD TO CART
+             
             </div>
             <div
               className="heart btn hoverable"

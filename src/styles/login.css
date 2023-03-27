@@ -1,0 +1,9 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-page h1 {
+  text-align: center;
+  text-transform: uppercase;
+}/*# sourceMappingURL=login.css.map */

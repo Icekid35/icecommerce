@@ -1,9 +1,11 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useEffect, useState } from "react";
 import fake from "../assets/fake.json";
+import reducer from "./reducer";
 
 export const DataContext = createContext();
 
 export default function Wrapper({ children }) {
+  const [runOnce] = useState(null);
   const [state, dispatch] = useReducer(reducer, {
     shopProducts: fake,
     user: {
@@ -11,166 +13,18 @@ export default function Wrapper({ children }) {
       wishlist: [],
     },
   });
-  function reducer(state, action) {
-    const { type, payload, quantity } = action;
-    switch (type) {
-      case "add-to-cart":
-        if (state.user.cart.find((product) => product.id == payload.id)) {
-          let update = state.user.cart.find(
-            (product) => product.id == payload.id
-          );
-          return {
-            ...state,
-            user: {
-              ...state.user,
-              cart: [
-                ...state.user.cart
-                  .slice()
-                  .splice(0, state.user.cart.indexOf(update)),
-                {
-                  ...update,
-                  quantity: update.quantity + 1,
-                  sizes: [...update.sizes, ...(payload.sizes ?? "default")],
-                  colors: [...update.colors, ...(payload.colors ?? "default")],
-                },
-                ...state.user.cart
-                  .slice()
-                  .splice(
-                    state.user.cart.indexOf(update) + 1,
-                    state.user.cart.length - 1
-                  ),
-              ],
-            },
-          };
-        }
-        return {
-          ...state,
-          user: {
-            ...state.user,
 
-            cart: [
-              {
-                ...payload,
-                quantity: 1,
-                sizes: payload.sizes ?? ["default"],
-                colors: payload.colors ?? ["default"],
-              },
-              ...state.user.cart,
-            ],
-          },
-        };
+  useEffect(() => {
+    const StoredUserData = window.localStorage.getItem("user");
+    if (StoredUserData)
+      dispatch({ type: "getUser", payload: JSON.parse(StoredUserData) });
+  }, [runOnce]);
+  useEffect(() => {
+    const StoredUserData = window.localStorage.getItem("user");
+    if (JSON.parse(StoredUserData)?.name && !state.user?.name) return () => {};
 
-        break;
-      case "decrease-cart":
-        if (state.user.cart.find((product) => product.id == payload.id)) {
-          let update = state.user.cart.find(
-            (product) => product.id == payload.id
-          );
-          return {
-            ...state,
-            user: {
-              ...state.user,
-              cart: [
-                ...state.user.cart
-                  .slice()
-                  .splice(0, state.user.cart.indexOf(update)),
-                {
-                  ...update,
-                  quantity: update.quantity <= 1 ? 1 : update.quantity - 1,
-                },
-                ...state.user.cart
-                  .slice()
-                  .splice(
-                    state.user.cart.indexOf(update) + 1,
-                    state.user.cart.length - 1
-                  ),
-              ],
-            },
-          };
-        }
-
-        return state;
-
-        break;
-      case "remove-from-cart":
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            cart: [
-              ...state.user.cart.filter((product) => product.id != payload.id),
-            ],
-          },
-        };
-
-        break;
-      case "custom-cart-quantity":
-        let update = state.user.cart.find(
-          (product) => product.id == payload.id
-        );
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            cart: [
-              ...state.user.cart
-                .slice()
-                .splice(0, state.user.cart.indexOf(update)),
-              {
-                ...update,
-                quantity,
-              },
-              ...state.user.cart
-                .slice()
-                .splice(
-                  state.user.cart.indexOf(update) + 1,
-                  state.user.cart.length - 1
-                ),
-            ],
-          },
-        };
-
-        break;
-      case "add-to-wishlist":
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            wishlist: [{ ...payload }, ...state.user.wishlist],
-          },
-        };
-
-        break;
-      case "remove-from-wishlist":
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            wishlist: [
-              ...state.user.wishlist.filter(
-                (product) => product.id != payload.id
-              ),
-            ],
-          },
-        };
-
-        break;
-      case "empty-cart":
-        return {
-          ...state,
-          user: {
-            cart: [],
-          },
-        };
-
-        break;
-
-      default:
-        return state;
-
-        break;
-    }
-  }
+    window.localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>

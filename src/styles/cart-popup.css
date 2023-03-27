@@ -15,7 +15,7 @@
   .cart-popup {
     position: fixed;
     top: 100px;
-    left: 0px;
+    right: 0px;
     z-index: 100;
   }
 }

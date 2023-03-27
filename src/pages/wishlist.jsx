@@ -5,7 +5,7 @@ import { DataContext } from "../controller/state";
 import { Link } from "react-router-dom";
 
 function TbodyW({ dispatch, product }) {
-  const { images, title, price, id } = product;
+  const { images, title, price, id ,} = product;
   return (
     <>
       <tr>
@@ -17,12 +17,12 @@ function TbodyW({ dispatch, product }) {
           X
         </td>
         <td>
-          <Link to={`/product/${id}`}>
-            <img src={/*images[0] */ require(`../assets/products/${1}.webp`)} />
+          <Link to={`/products/${id}`}>
+            <img src={images[0] } />
           </Link>
         </td>
         <td>
-          <Link to={`/product/${id}`}>{title}</Link>
+          <Link to={`/products/${id}`}>{title}</Link>
         </td>
         <td>${price}</td>
       </tr>

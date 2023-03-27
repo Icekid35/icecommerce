@@ -6,7 +6,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import Title from "../components/title";
 import { useEffect, useState } from "react";
-const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 export default function Checkout() {
   const [runOnce] = useState(null);

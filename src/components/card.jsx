@@ -128,9 +128,9 @@ export default function Card({ product, dispatch }) {
         <img
           loading="lazy"
           src={
-            /* images[0]*/ require(`../assets/products/${
+            images[0] /*require(`../assets/products/${
               Math.round(Math.random() * 6) + 1
-            }.webp`)
+            }.webp`)*/
           }
           alt={title}
         />
@@ -220,9 +220,9 @@ export function ListCard({ product, dispatch }) {
         <img
           loading="lazy"
           src={
-            /*images[0]*/ require(`../assets/products/${
+            images[0]/* require(`../assets/products/${
               Math.round(Math.random() * 6) + 1
-            }.webp`)
+            }.webp`)*/
           }
           alt={title}
         />
@@ -256,40 +256,40 @@ export function ListCard({ product, dispatch }) {
     </div>
   );
 }
-export function TopCard({ name, image, price, id = 1 }) {
-  return (
-    <>
-      <div className="list-card top-card">
-        <div className="card-image">
-          <img
-            loading="lazy"
-            src={require(`../assets/products/${image}.webp`)}
-            alt=""
-          />
-          <div className="action-btns">
-            <Link to={`/products/${id}`}>
-              <div className="preview">
-                <FontAwesomeIcon icon={faEye} />
-              </div>
-            </Link>
-          </div>
-        </div>
-        <div className="card-text">
-          <div className="card-name">{name}</div>
-          <div className="card-price">${price}</div>
-          <div className="bottom">
-            <div
-              className="heart hoverable"
-              onClick={(e) => addToWishlist(1, e)}
-            >
-              <FontAwesomeIcon icon={faHeart} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+// export function TopCard({ name, image, price, id = 1 }) {
+//   return (
+//     <>
+//       <div className="list-card top-card" >
+//         <div className="card-image">
+//           <img
+//             loading="lazy"
+//             src={require(`../assets/products/${image}.webp`)}
+//             alt=""
+//           />
+//           <div className="action-btns">
+//             <Link to={`/products/${id}`}>
+//               <div className="preview">
+//                 <FontAwesomeIcon icon={faEye} />
+//               </div>
+//             </Link>
+//           </div>
+//         </div>
+//         <div className="card-text">
+//           <div className="card-name">{name}</div>
+//           <div className="card-price">${price}</div>
+//           <div className="bottom">
+//             <div
+//               className="heart hoverable"
+//               onClick={(e) => addToWishlist(1, e)}
+//             >
+//               <FontAwesomeIcon icon={faHeart} />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
 export function CartCard({ product }) {
   const { title, price, quantity, images, id } = product;
   const { state, dispatch } = useContext(DataContext);
@@ -314,9 +314,7 @@ export function CartCard({ product }) {
       <div className="card-image">
         <img
           loading="lazy"
-          src={require(`../assets/products/${
-            Math.round(Math.random() * 6) + 1
-          }.webp`)}
+          src={images[0]}
           alt=""
         />
         <div className="action-btns">

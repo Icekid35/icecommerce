@@ -28,12 +28,14 @@
   width: 100%;
   height: 100%;
   transform: scale(1.1);
+  background-color: var(--neutral-color);
 }
 .card .card-image:not(:hover) .action-btns {
   opacity: 0;
 }
 .card .card-image:not(:hover) img {
   transform: scale(1);
+  background-color: var(--neutral-color);
 }
 .card .card-image:not(:hover) .heart {
   transform: translateX(-50%);
@@ -111,6 +113,7 @@
   width: 100%;
   height: 100%;
   transform: scale(1.1);
+  background-color: var(--neutral-color);
 }
 .list-card .card-image .action-btns {
   display: flex;
@@ -142,6 +145,7 @@
 }
 .list-card .card-image:not(:hover) img {
   transform: scale(1);
+  background-color: var(--neutral-color);
 }
 .list-card .card-text {
   margin-top: 1rem;
@@ -198,6 +202,7 @@
 }
 .top-card:not(:hover) img {
   transform: scale(1);
+  background-color: var(--neutral-color);
 }
 .top-card .card-text {
   margin-top: 0rem;

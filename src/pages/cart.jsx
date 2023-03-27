@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Tbody({ product, dispatch }) {
-  const { image, title, id, price, quantity } = product;
+  const { images, title, id, price, quantity,colors=[],sizes=[] } = product;
   return (
     <>
       <tr>
@@ -22,12 +22,12 @@ function Tbody({ product, dispatch }) {
           X
         </td>
         <td>
-          <Link to={`/product/${id}`}>
-            <img src={/*images[0] */ require(`../assets/products/${1}.webp`)} />
+          <Link to={`/products/${id}`}>
+            <img src={images[0] } />
           </Link>
         </td>
         <td>
-          <Link to={`/product/${id}`}>{title}</Link>
+          <Link to={`/products/${id}`}>{title}</Link>
         </td>
         <td>${price}</td>
         <td>
@@ -43,8 +43,11 @@ function Tbody({ product, dispatch }) {
             }
             value={quantity}
           />
+ 
         </td>
-        <td>${price * quantity}</td>
+        <td>{Array(...new Set(colors)).slice().join(', ')}</td>
+        <td>{Array(...new Set(sizes)).join(', ')}</td>
+       <td>${price * quantity}</td>
       </tr>
     </>
   );
@@ -79,6 +82,8 @@ export default function Cart() {
                 <th>product</th>
                 <th>price</th>
                 <th>quantity</th>
+                <th>colors</th>
+                <th>sizes</th>
                 <th>total</th>
               </tr>
             </thead>

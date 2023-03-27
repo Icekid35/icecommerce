@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import Card, { ListCard, TopCard } from "../components/card";
+import Card, { ListCard } from "../components/card";
 import CardHolder, { ListCardHolder } from "../components/cardHolder";
 import Title from "../components/title";
 import "../styles/shop.css";
@@ -36,7 +36,7 @@ export default function Shop() {
 
   // The currently active category
   const [activeCategory, setActiveCategory] = useState("all");
-const [runOnce]=useState(null)
+  const [runOnce] = useState(null);
   // The list of unique categories in the products data
   const [categories, _] = useState(
     new Array(
@@ -53,19 +53,19 @@ const [runOnce]=useState(null)
   // Set the search query param when the search term is updated
   useEffect(() => {
     if (searchTerm.length >= 1) {
-      setQueries({ search: searchTerm ,category:activeCategory});
+      setQueries({ search: searchTerm, category: activeCategory });
     }
-  }, [searchTerm,activeCategory]);
+  }, [searchTerm, activeCategory]);
 
   // Update the search term when the URL search param changes
   useEffect(() => {
-    if (query.get("category")?.length>=1) {
+    if (query.get("category")?.length >= 1) {
       switchCategory(query.get("category"));
-      
     }
     if (query.get("search") && query.get("search") !== searchTerm) {
       setSearchTerm(query.get("search"));
     }
+    autofixImages();
   }, [runOnce]);
 
   // Search for products when the search button is clicked
@@ -206,7 +206,6 @@ const [runOnce]=useState(null)
     setListMode(MODE == "list" ? true : false);
   }
 
-  useEffect(() => {});
   const [priceRange, setPriceRange] = useState(1);
   useEffect(() => {
     const newP = products
@@ -222,7 +221,26 @@ const [runOnce]=useState(null)
       .getElementById("shop-page")
       .scrollIntoView({ behavior: "smooth", block: "start" });
     return () => {};
-  }, [priceRange, activeCategory, searchTerm,batch]);
+  }, [priceRange, activeCategory, searchTerm]);
+
+  function autofixImages() {
+    const allImg = document.querySelectorAll("img");
+    //  console.log(allImg)
+
+    allImg.forEach((image) => {
+     
+      image.addEventListener(
+        "error",
+        function (e) {
+          e.preventDefault();
+          var src = this.src;
+          this.src =
+            src.substr(0, src.indexOf("?")) + "?t=" + new Date().getTime();
+        },
+        { once: 3 }
+      );
+    });
+  }
   return (
     <>
       <Title />
@@ -324,12 +342,12 @@ const [runOnce]=useState(null)
             <span>ML</span>
             <span>LM</span>
           </div>
-          <div className="title">Most bought products</div>
+          {/* <div className="title">Most bought products</div>
           <div className="top-products">
             <TopCard name={"flying drone"} image={1} price={140.0} />
             <TopCard name={"flying drone"} image={1} price={140.0} />
             <TopCard name={"flying drone"} image={1} price={140.0} />
-          </div>
+          </div> */}
         </div>
         <div>
           <div className="shop-top-section">

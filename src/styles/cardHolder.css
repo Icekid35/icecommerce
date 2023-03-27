@@ -7,9 +7,8 @@
 
 .list-cards-holder {
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: 1rem;
   margin: 10vmin 3vmin;
-  padding: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
 }
 

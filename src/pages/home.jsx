@@ -29,6 +29,7 @@ import {
   faDoorOpen,
   faCartShopping,
   faHeadset,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { appName } from "../base";
 
@@ -66,7 +67,12 @@ function Banner({ state, dispatch }) {
         <header>
           <div className="logo">{appName}</div>
           <div className="sec2">
-            <div className="logreg">
+         {state.user.name ?   <div className="logreg">
+              Hello {state.user.given_name}
+              <FontAwesomeIcon icon={faStar}/>
+            </div>
+              :
+              <div className="logreg">
               <Link to="/login" className="login">
                 {" "}
                 <FontAwesomeIcon icon={faSignIn} />
@@ -77,7 +83,7 @@ function Banner({ state, dispatch }) {
                 <FontAwesomeIcon icon={faDoorOpen} />
                 REG
               </Link>
-            </div>
+            </div>}
             <div className="cart" data-now={state.user.cart.length}>
               {/* <CartCard /> */}
               <FontAwesomeIcon icon={faCartShopping} size={"2x"} />

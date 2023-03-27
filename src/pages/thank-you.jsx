@@ -3,6 +3,7 @@ import "../styles/thank-you.css";
 import confetti from "canvas-confetti";
 import { ReactComponent as Thanks } from "../assets/illustrations/people-clapping-on-balconies-animate.svg";
 import "../styles/svg.css";
+import { Link } from "react-router-dom";
 
 export default function Thankyou() {
   const [runOnce] = useState(null);
@@ -48,7 +49,7 @@ export default function Thankyou() {
         <div className="svg-wrapper">
           <Thanks />
         </div>
-        <div className="button">Shop again</div>
+        <Link to={'/shop' } className="button">Shop again</Link>
       </div>
     </>
   );
