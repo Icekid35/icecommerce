@@ -1,1 +1,64 @@
-/*# sourceMappingURL=checkout.css.map */
+.checkout-page {
+  padding: 1rem;
+}
+.checkout-page h1 {
+  margin-bottom: 0.5rem;
+}
+.checkout-page .text {
+  text-transform: capitalize;
+  color: var(--text-color-light);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.checkout-page form {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: auto;
+  max-width: 800px;
+}
+.checkout-page form .row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.checkout-page form .row .input-holder {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.checkout-page form .row .input-holder label {
+  color: var(--text-color-light);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+.checkout-page form .row .input-holder label::after {
+  content: "  (required)";
+  opacity: 0.75;
+}
+.checkout-page form .row .input-holder input {
+  width: 100%;
+  outline: none;
+  border: 1px solid var(--text-color-light);
+  padding: 10px;
+  border-radius: 5px;
+}
+.checkout-page form button {
+  padding: 1rem;
+  font-weight: 700;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  border: none;
+  outline: 0px;
+  cursor: pointer;
+}
+.checkout-page form button:disabled {
+  cursor: not-allowed;
+}
+.checkout-page .paystack-button {
+  display: none;
+  opacity: 0;
+}/*# sourceMappingURL=checkout.css.map */

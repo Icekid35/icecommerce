@@ -1,16 +1,20 @@
 :root {
     /* --neutral-color:#FAFAFA; */
     // --neutral-color:#333232;
-    // --text-color:rgb(250, 248, 248);
     // --text-color-light:rgba(248, 245, 245, 0.664);
+    // --text-color:rgb(250, 250, 250);
     // --bg-color:rgb(41, 40, 40);
+    // --footer-text-color:rgb(250, 248, 248);
+    // --footer-bg-color:#000;
     // --primary-color:#fdf903;
     --neutral-color:#F1F1F1;
-    --text-color:#000;
     --text-color-light:rgba(0, 0, 0, 0.664);
+    --text-color:#000;
     --bg-color:#fff;
+    --footer-bg-color:#000;
+    --footer-text-color:#fff;
     --primary-color:#03BFFD;
-    --font:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace ;
+    // --font:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace ;
   }
   
   body {
@@ -77,15 +81,64 @@ img{
   min-height: 50px;
 }
 
-.loading{
-animation:load 1s ease-out infinite alternate;
-  @keyframes load{
-    from{
-filter:hue-rotate(0deg)
-    }
-    to{
-filter:hue-rotate(360deg)
+.place-holder-loading{
+position:absolute;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
+display: flex;
+align-items: center;
+gap:1rem;
+  div{
+    min-width:50px;
+    min-height:50px;
+    border-radius: 50%;
+    border:2px solid var(--primary-color);
+    animation: load 1s cubic-bezier(0, 0.26, 0.55, 1.97) 0s infinite  ;
+    @keyframes load{
+      from{
+        transform: rotate(0deg) scale(1);
 
+      }
+      to{
+        transform: rotate(360deg) scale(.6);
+        border-radius: 0px;
+      }
     }
   }
 }
+
+.place-holder-loading-fixed{
+margin:auto;
+display: flex;
+align-items: center;
+gap:1rem;
+  div{
+    min-width:50px;
+    min-height:50px;
+    border-radius: 50%;
+    border:2px solid var(--primary-color);
+    animation: load 1s cubic-bezier(0, 0.26, 0.55, 1.97) 0s infinite  ;
+    @keyframes load{
+      from{
+        transform: rotate(0deg) scale(1);
+
+      }
+      to{
+        transform: rotate(360deg) scale(.6);
+        border-radius: 0px;
+      }
+    }
+  }
+}
+
+input{
+  background-color: inherit;
+  color:inherit;
+}
+
+
+
+
+
+

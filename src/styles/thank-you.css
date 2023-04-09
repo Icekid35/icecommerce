@@ -14,6 +14,13 @@
     font-size: 1rem;
   }
 }
+.thank-you-page h6 {
+  margin: auto;
+  padding: 0px;
+  color: var(--text-color-light);
+  font-style: italic;
+  font-size: 1rem;
+}
 .thank-you-page .button {
   border-radius: 1rem;
   padding: 1rem 2rem;

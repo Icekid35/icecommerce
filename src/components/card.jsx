@@ -10,6 +10,7 @@ import {
   faCartPlus,
   faEye,
   faHeart,
+  faNairaSign,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -63,7 +64,7 @@ function addToWishlist(product, e) {
   );
 }
 
-export default function Card({ product, dispatch }) {
+export default function Card({ product, dispatch,selectedColor,selectedSize }) {
   const { images, description, id, creationAt, category, price, title } =
     product;
   function addToCart(product, e) {
@@ -80,7 +81,7 @@ export default function Card({ product, dispatch }) {
     toast.promise(
       new Promise((resolve, reject) => {
         try {
-          dispatch({ type: "add-to-cart", payload: product });
+          dispatch({ type: "add-to-cart", payload: product,color:selectedColor,size:selectedSize });
           resolve("done");
         } catch {
           reject("error occured");
@@ -150,12 +151,12 @@ export default function Card({ product, dispatch }) {
       </div>
       <div className="card-text">
         <div className="card-name">{title}</div>
-        <div className="card-price">${price}</div>
+        <div className="card-price"><FontAwesomeIcon icon={faNairaSign} />{price}</div>
       </div>
     </div>
   );
 }
-export function ListCard({ product, dispatch }) {
+export function ListCard({ product, dispatch,selectedSize,selectedColor }) {
   const { images, description, id, creationAt, category, price, title } =
     product;
   function addToCart(product, e) {
@@ -172,7 +173,7 @@ export function ListCard({ product, dispatch }) {
     toast.promise(
       new Promise((resolve, reject) => {
         try {
-          dispatch({ type: "add-to-cart", payload: product });
+          dispatch({ type: "add-to-cart", payload: product,color:selectedColor,size:selectedSize });
           resolve("done");
         } catch {
           reject("error occured");
@@ -236,7 +237,7 @@ export function ListCard({ product, dispatch }) {
       </div>
       <div className="card-text">
         <div className="card-name">{title}</div>
-        <div className="card-price">${price}</div>
+        <div className="card-price"><FontAwesomeIcon icon={faNairaSign} />{price}</div>
         <div className="text">{description}</div>
         <div className="bottom">
           <div
@@ -327,7 +328,7 @@ export function CartCard({ product }) {
       </div>
       <div className="card-text">
         <div className="card-name">{title}</div>
-        <div className="card-price">${price}</div>
+        <div className="card-price"><FontAwesomeIcon icon={faNairaSign} />{price}</div>
         <div className="bottom">
           <div className="number">
             <span

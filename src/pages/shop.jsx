@@ -9,14 +9,18 @@ import { useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faList,
+  faNairaSign,
   faSearch,
   faTh,
   faThLarge,
   faThList,
 } from "@fortawesome/free-solid-svg-icons";
+import {ReactComponent as EmptyImage} from '../assets/illustrations/No data-rafiki.svg'
+import '../styles/svg.css'
+import Seo from "../components/seo";
 
 const productsPerPage = 30;
-
+const colors=['red','black','white','blue','green','yellow']
 export default function Shop() {
   const { state, dispatch } = useContext(DataContext);
   const { shopProducts } = state;
@@ -30,7 +34,8 @@ export default function Shop() {
 
   // The current batch
   const [batch, setBatch] = useState(0);
-
+  const [selectedColor,setSelectedColor]=useState(null)
+  const [selectedSize,setSelectedSize]=useState(null)
   // The search term
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -243,7 +248,9 @@ export default function Shop() {
   }
   return (
     <>
-      <Title />
+      <Seo title='Shop' />
+      
+      <Title name={'Shop'} link='HOME /SHOP' />
       <div className="shop" id="shop-page">
         <div className="tools">
           <div className="title">Search products</div>
@@ -273,7 +280,7 @@ export default function Shop() {
             ></input>
             <div className="text">
               <div>
-                Price : <span>${priceRange}</span> - <span>$1000</span>
+                Price : <span><FontAwesomeIcon icon={faNairaSign} />{priceRange}</span> - <span>$1000</span>
               </div>
               <div>Filter</div>
             </div>
@@ -324,24 +331,22 @@ export default function Shop() {
             </div> */}
           </div>
           <div className="title">color</div>
-          <div className="colors">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div className="title">size</div>
-          <div className="sizes">
-            <span>XL</span>
-            <span>M</span>
-            <span>L</span>
-            <span>ML</span>
-            <span>LM</span>
-          </div>
+            <div className="colors">
+{
+                colors.map(color => {
+    return(
+      <span title={color} style={{backgroundColor:color,border:selectedColor!=color ? '1px solid var(--neutral-color)' : '1px solid var(--text-color)'}} onClick={()=>setSelectedColor(color)}></span>
+    )
+  })
+}            </div>
+            <div className="title">size</div>
+            <div className="sizes">
+              <span style={{backgroundColor:'XL' !=selectedSize ?'': 'var(--neutral-color)'}}  title='extra large' onClick={()=>{setSelectedSize('XL')}}>XL</span>
+              <span style={{backgroundColor:'M' !=selectedSize ?'': 'var(--neutral-color)'}} title='medium' onClick={()=>{setSelectedSize('M')}}>M</span>
+              <span style={{backgroundColor:'L' !=selectedSize ?'': 'var(--neutral-color)'}} title='large' onClick={()=>{setSelectedSize('L')}}>L</span>
+              <span style={{backgroundColor:'ML' !=selectedSize ?'': 'var(--neutral-color)'}} title='ML' onClick={()=>{setSelectedSize('ML')}}>ML</span>
+              <span style={{backgroundColor:'LM' !=selectedSize ?'': 'var(--neutral-color)'}} title='LM' onClick={()=>{setSelectedSize('LM')}}>LM</span>
+            </div>
           {/* <div className="title">Most bought products</div>
           <div className="top-products">
             <TopCard name={"flying drone"} image={1} price={140.0} />
@@ -383,11 +388,17 @@ export default function Shop() {
               ></FontAwesomeIcon>
             </div>
           </div>
+          {data.length < 1 ?
+            <div className="svg-wrapper">
+              <EmptyImage />
+            </div>
+            :
+
           <>
             {listMode ? (
               <ListCardHolder>
                 {data.map((product) => (
-                  <ListCard product={product} dispatch={dispatch} />
+                  <ListCard product={product} dispatch={dispatch} selectedSize={selectedSize } selectedColor={selectedColor} />
                 ))}
                 {/* <ListCard name={"navyn bird print"} image={1} price={115.0} />
                 <ListCard name={"navyn bird print"} image={2} price={115.0} />
@@ -400,7 +411,7 @@ export default function Shop() {
             ) : (
               <CardHolder>
                 {data.map((product) => (
-                  <Card product={product} dispatch={dispatch} />
+                  <Card product={product} dispatch={dispatch} selectedSize={selectedSize } selectedColor={selectedColor} />
                 ))}
                 {/* <Card name={"navyn bird print"} image={2} price={115.0} />
                 <Card name={"navyn bird print"} image={3} price={115.0} />
@@ -442,6 +453,7 @@ export default function Shop() {
               </div>
             </div>
           </>
+          }
         </div>
       </div>
     </>

@@ -32,12 +32,15 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { appName } from "../base";
+import Seo from "../components/seo";
 
 function Banner({ state, dispatch }) {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
+      <Seo title='Home' />
+      
       <div
         className="overlay-menu"
         style={{ display: showMenu ? "flex" : "none" }}

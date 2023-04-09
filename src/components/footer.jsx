@@ -2,13 +2,14 @@ import { appName } from "../base";
 import { DataContext } from "../controller/state";
 import "../styles/footer.css";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faHeadset, faMailForward, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function Footer() {
   const { state, dispatch } = useContext(DataContext);
   const { shopProducts } = state;
+  const navigate=useNavigate()
   const [categories, _] = useState(
     new Array(
       ...new Set(shopProducts.slice().map((product) => product.category.name))
@@ -24,9 +25,7 @@ export default function Footer() {
             <li>
               <Link to="/cart">Cart</Link>
             </li>
-            <li>
-              <Link to="/account">my account</Link>
-            </li>
+
             <li>
               <Link to="/login">LOGIN</Link>
             </li>
@@ -86,14 +85,16 @@ export default function Footer() {
             <li>
               <div className="searchbar">
                 <input type="text" placeholder="Your Email" />
-                <span className="action">
+                <span className="action" onClick={() => {
+                  navigate('/contact')
+                }}>
                   {" "}
                   <FontAwesomeIcon icon={faEnvelope} />
                 </span>
               </div>
             </li>
             <li>77 Seventh avenue USA 12555.</li>
-            <li>+88 (015) 609735 or +88 (012) 112266</li>
+            <li><a href={'tel:+2348157899361'}>+234 815 789 9361</a> or <a href={'tel:+2347032958327'}>+234 703 295 8327</a></li>
           </ul>
         </div>
       </footer>

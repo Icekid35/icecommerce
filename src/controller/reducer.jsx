@@ -3,11 +3,19 @@ export default   function reducer(state, action) {
 
    
     switch (type) {
+      case 'shopping-products':
+        return {
+          ...state,
+         shopProducts:payload
+        }
+        break;
       case 'getUser':
         return {
           ...state,
           user: {
             ...payload,
+            cart: payload.cart || [],
+            wishlist: payload.wishlist || [],
           }
         }
         break;
@@ -165,6 +173,7 @@ export default   function reducer(state, action) {
         return {
           ...state,
           user: {
+            ...state.user,
             cart: [],
           },
         };

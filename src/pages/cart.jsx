@@ -1,13 +1,17 @@
 import Title from "../components/title";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, useRef } from "react";
 import "../styles/cart.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../controller/state";
 import {
   faCartArrowDown,
   faMoneyBill1Wave,
+  faNairaSign,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import proceedToCheckout from "../controller/proceed-to-checkout";
+import Seo from "../components/seo";
+import { toast } from "react-hot-toast";
 
 function Tbody({ product, dispatch }) {
   const { images, title, id, price, quantity,colors=[],sizes=[] } = product;
@@ -29,7 +33,7 @@ function Tbody({ product, dispatch }) {
         <td>
           <Link to={`/products/${id}`}>{title}</Link>
         </td>
-        <td>${price}</td>
+        <td><FontAwesomeIcon icon={faNairaSign} />{price}</td>
         <td>
           <input
             type="number"
@@ -47,7 +51,7 @@ function Tbody({ product, dispatch }) {
         </td>
         <td>{Array(...new Set(colors)).slice().join(', ')}</td>
         <td>{Array(...new Set(sizes)).join(', ')}</td>
-       <td>${price * quantity}</td>
+       <td><FontAwesomeIcon icon={faNairaSign} />{price * quantity}</td>
       </tr>
     </>
   );
@@ -55,17 +59,54 @@ function Tbody({ product, dispatch }) {
 export default function Cart() {
   const { state, dispatch } = useContext(DataContext);
   const [runOnce] = useState(null);
-
+  const navigate=useNavigate()
   useEffect(() => {
     document
       .getElementById("cart-page")
       .scrollIntoView({ behavior: "smooth", block: "start" });
   }, [runOnce]);
-  const sumCart = (arr) =>
-    arr.reduce((total, item) => item.price * item.quantity + total, 0);
+  const sumCart = (arr) => arr.reduce((total, item) => item.price * item.quantity + total, 0);
   const cartTotal = sumCart(state.user.cart);
+
+  const [off,setOff]=useState(0)
+  const couponRef=useRef(null)
+  const applyCoupon =async (resolve,reject) => {
+    const { value } = couponRef.current
+    if (value.trim() == '') {
+      toast('please input a coupon')
+      return reject('error')
+    }
+    // const featcher = await fetch('/verify-coupon', {
+    //   method: 'POST',
+    //   body: JSON.stringify({coupon : value.trim()}),
+    //   headers: { 'content-type': 'application/json' }
+    // })
+
+    // if (!featcher.ok) {
+    //   toast.error("an unexpected error occured ")
+    //   reject()
+    //   return
+    // }
+    // const result = await featcher.json()
+    // couponRef.current.value = ''
+    // console.log(result);
+    // if (result.error) {
+    //   toast.error(result.error)
+    //   reject()
+    //   return
+    // }
+    // if (result.off) {
+    //   setOff(result.off)
+    //   toast.success('coupon applied sucessfully')
+    // }
+    toast('Coupons are not currently availiable')
+    resolve('sucess')
+
+  }
   return (
     <>
+      <Seo title='your cart' />
+      
       <Title name={"CART"} link="HOME / CART" />
       {state.user.cart.length < 1 ? (
         <div id="cart-page">
@@ -99,8 +140,14 @@ export default function Cart() {
 
           <div className="update-coupon">
             <div className="sec1">
-              <input type="text" placeholder="Coupon code" />
-              <div className="btn apply">
+                <input type="text" placeholder="Coupon code" ref={couponRef } />
+              <div className="btn apply" onClick={()=>{
+                  toast.promise(new Promise(applyCoupon), {
+                    loading: 'applying coupon',
+                    success:"coupon applied",
+                    error:"something went wrong"
+                })
+              }}>
                 apply coupon
                 <FontAwesomeIcon icon={faMoneyBill1Wave} />
               </div>
@@ -109,20 +156,24 @@ export default function Cart() {
               <div className="btn update">update cart</div>
             </div>
           </div>
-          <div className="cart-totals-holder">
+          <div className="cart-totals-holder" >
             <div className="cart-totals">
               <div className="h2">Cart Totals</div>
               <div>
                 <div className="total">
                   <span>Subtotal</span>
-                  <span>${cartTotal}</span>
+                  <span><FontAwesomeIcon icon={faNairaSign} />{cartTotal}</span>
+                </div>
+                <div className="total">
+                  <span>Coupon</span>
+                  <span>{off}% off</span>
                 </div>
                 <div className="total">
                   <span>Total</span>
-                  <span>${cartTotal}</span>
+                  <span><FontAwesomeIcon icon={faNairaSign} />{Math.round(cartTotal - (cartTotal * (off/100)))}</span>
                 </div>
               </div>
-              <div className="btn proceed">
+              <div id="checkout" className="btn proceed" onClick={()=>proceedToCheckout(state,navigate)}>
                 Proceed To Checkout
                 <FontAwesomeIcon icon={faCartArrowDown} />
               </div>

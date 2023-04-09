@@ -7,8 +7,10 @@ import { toast } from "react-hot-toast";
 import confetti from "canvas-confetti";
 import { color } from "../base";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
-
+import { faCartPlus, faHeart, faNairaSign } from "@fortawesome/free-solid-svg-icons";
+import {ReactComponent as EmptyImage} from '../assets/illustrations/No data-rafiki.svg'
+import '../styles/svg.css'
+import Seo from "../components/seo";
 const demoProduct = {
   title: "",
   price: "",
@@ -22,24 +24,25 @@ export default function ProductDetail() {
   const { state, dispatch } = useContext(DataContext);
   const [selectedColor,setSelectedColor]=useState(null)
   const [selectedSize,setSelectedSize]=useState(null)
+ 
   const { id } = useParams();
   let product = state.shopProducts.find((item) => item.id == id);
   const redirect = useNavigate();
   if (!product) {
     product = demoProduct;
   }
-  useEffect(() => {
-    if (!product.title) {
-      redirect("/shop");
-    }
-  });
+  // useEffect(() => {
+  //   if (!product.title) {
+  //     redirect("/shop");
+  //   }
+  // });
   const { title, price, description, images, category,colors=['red','black','white','blue','green','yellow'] } = product;
 
   const [bigImage, setBigImage] = useState(images[0]);
   useEffect(() => {
     document
-      .getElementById("product-detail-page")
-      .scrollIntoView({ behavior: "smooth", block: "start" });
+      ?.getElementById("product-detail-page")
+      ?.scrollIntoView?.({ behavior: "smooth", block: "start" });
   }, [bigImage]);
   function mutate(type) {
     switch (type) {
@@ -87,9 +90,14 @@ export default function ProductDetail() {
   }
   return (
     <>
+      <Seo title={title+ ' Detail'} />
+      
       <Title name={"PRODUCT DETAIL"} link={"HOME / PRODUCT DETAIL"} />
 
-      <div className="product-detail" id="product-detail-page">
+    {title=='' ?  <div className="svg-wrapper" id="product-detail-page">
+              <EmptyImage />
+      </div>
+        : <div className="product-detail" id="product-detail-page">
         <div className="sec1">
           <img
             src={bigImage}
@@ -112,7 +120,7 @@ export default function ProductDetail() {
         </div>
         <div className="sec2">
           <div className="name">{title}</div>
-          <div className="price">${price}</div>
+          <div className="price"><FontAwesomeIcon icon={faNairaSign} />{price}</div>
           <div className="desc">{description}</div>
           <div className="tools">
             <div className="title">color</div>
@@ -214,25 +222,9 @@ export default function ProductDetail() {
               <span>shorts</span> */}
             </div>
           </div>
-          <div className="extra">
-            <div className="title">tags</div>
-            <div className="categories">
-              <span>FASHION</span>
-              <span>outdoor</span>
-              <span>shorts</span>
-            </div>
-          </div>
-          <div className="extra">
-            <div className="title">socials</div>
-            <div className="categories">
-              <a href="" className="social-btn"></a>
-              <a href="" className="social-btn"></a>
-              <a href="" className="social-btn"></a>
-              <a href="" className="social-btn"></a>
-            </div>
-          </div>
+
         </div>
-      </div>
+      </div>}
     </>
   );
 }

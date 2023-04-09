@@ -17,6 +17,7 @@
     top: 100px;
     right: 0px;
     z-index: 100;
+    max-height: calc(100vh - 130px);
   }
 }
 .cart-popup .title {

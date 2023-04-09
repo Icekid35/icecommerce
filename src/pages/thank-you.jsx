@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import "../styles/thank-you.css";
 import confetti from "canvas-confetti";
 import { ReactComponent as Thanks } from "../assets/illustrations/people-clapping-on-balconies-animate.svg";
 import "../styles/svg.css";
 import { Link } from "react-router-dom";
+import { DataContext } from "../controller/state";
+import Seo from "../components/seo";
 
 export default function Thankyou() {
   const [runOnce] = useState(null);
+  const { state, dispatch } =useContext(DataContext)
 
   useEffect(() => {
+    dispatch({type:'empty-cart'})
     var duration = 15 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -45,7 +49,10 @@ export default function Thankyou() {
   return (
     <>
       <div className="thank-you-page">
-        <h1>Thank you for shopping with us</h1>
+      <Seo title='thank you' />
+
+        <h1>Your order is on the way..</h1>
+        <h6>An email will be sent to you on the email address you provided</h6>
         <div className="svg-wrapper">
           <Thanks />
         </div>

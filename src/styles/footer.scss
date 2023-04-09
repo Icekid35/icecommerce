@@ -2,8 +2,8 @@
 footer{
     margin-top:2rem;
 
-    background-color: var(--text-color);
-    color:var(--bg-color);
+    background-color: var(--footer-bg-color);
+    color:var(--footer-text-color);
     padding: 5rem;
     display: grid;
     justify-items: space-around;
@@ -72,7 +72,7 @@ footer{
         text-align: center;
         background-color: rgb(29, 28, 28);
         width: 100vw;
-        color: var(--bg-color);
+        color: var(--footer-text-color);
     }
 
     @media (max-width:600px){

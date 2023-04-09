@@ -3,6 +3,9 @@ import "../styles/cart.css";
 import { useEffect, useContext, useState } from "react";
 import { DataContext } from "../controller/state";
 import { Link } from "react-router-dom";
+import Seo from "../components/seo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faNairaSign } from "@fortawesome/free-solid-svg-icons";
 
 function TbodyW({ dispatch, product }) {
   const { images, title, price, id ,} = product;
@@ -24,7 +27,7 @@ function TbodyW({ dispatch, product }) {
         <td>
           <Link to={`/products/${id}`}>{title}</Link>
         </td>
-        <td>${price}</td>
+        <td><FontAwesomeIcon icon={faNairaSign} />{price}</td>
       </tr>
     </>
   );
@@ -40,6 +43,8 @@ export default function Wishlist() {
   }, [runOnce]);
   return (
     <>
+      <Seo title='wishlist' />
+      
       <Title name={"WISHLIST"} link="HOME / WISHLIST" />
       <div className="cart-page" id="wishlist-page">
         <h1>WISHLIST</h1>
@@ -53,10 +58,10 @@ export default function Wishlist() {
             </tr>
           </thead>
           <tbody>
-            {state.user.wishlist.length < 1 ? (
+            {state.user.wishlist?.length < 1 ? (
               <h1>YOUR WISHLIST IS EMPTY</h1>
             ) : (
-              state.user.wishlist.map((product) => (
+              state.user?.wishlist?.map?.((product) => (
                 <TbodyW product={product} dispatch={dispatch} />
               ))
             )}

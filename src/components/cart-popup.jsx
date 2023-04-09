@@ -1,9 +1,16 @@
 import { faCartArrowDown, faCross, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-hot-toast";
+// import proceedToCheckout from "../controller/proceed-to-checkout";
 import "../styles/cart-popup.css";
 import { CartCard } from "./card";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPopup({ state, dispatch }) {
+const [checkoutStatus,setCheckoutStatus]=useState(false)
+  const navigate = useNavigate()
+
   return (
     <>
       {state.user.cart.length < 1 ? (
@@ -33,7 +40,7 @@ export default function CartPopup({ state, dispatch }) {
               Empty cart
               <FontAwesomeIcon icon={faTrash} size={"lg"} />
             </div>
-            <div className="checkout">
+              <div className="checkout" onClick={()=>navigate('/cart#checkout') }>
               Check out
               <FontAwesomeIcon icon={faCartArrowDown} size={"lg"} />
             </div>
