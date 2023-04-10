@@ -22,7 +22,7 @@ navigate(-1)
       <Seo title='Login' />
       
       <GoogleOAuthProvider
-        clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
+        clientId={'145842574317-m0luj8p161vsvpq503dmq91ualr02g4v.apps.googleusercontent.com'}
         onScriptLoadError={(e) => {
         //   console.log("error loading google script");
         //   toast.error("error loading google script");
