@@ -157,7 +157,7 @@ function addToWishlist(product, e) {
   );
  })
  export default Card
-const ListCard=  memo(function ListCard({ product, dispatch,selectedSize,selectedColor }) {
+export const ListCard=  memo(function ListCard({ product, dispatch,selectedSize,selectedColor }) {
   const { images, description, id, creationAt, category, price, title } =
     product;
   function addToCart(product, e) {
@@ -258,7 +258,6 @@ const ListCard=  memo(function ListCard({ product, dispatch,selectedSize,selecte
     </div>
   );
 })
-exports.ListCard=ListCard
 
 export function CartCard({ product }) {
   const { title, price, quantity, images, id } = product;
