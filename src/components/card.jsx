@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
 import "../styles/card.css";
-import { useContext } from "react";
+import { useContext,memo } from "react";
 import confetti from "canvas-confetti";
 import { color } from "../base";
 import { Link } from "react-router-dom";
@@ -64,7 +64,7 @@ function addToWishlist(product, e) {
   );
 }
 
-export default function Card({ product, dispatch,selectedColor,selectedSize }) {
+ const Card= memo(function Card({ product, dispatch,selectedColor,selectedSize }) {
   const { images, description, id, creationAt, category, price, title } =
     product;
   function addToCart(product, e) {
@@ -155,8 +155,9 @@ export default function Card({ product, dispatch,selectedColor,selectedSize }) {
       </div>
     </div>
   );
-}
-export function ListCard({ product, dispatch,selectedSize,selectedColor }) {
+ })
+ export default Card
+const ListCard=  memo(function ListCard({ product, dispatch,selectedSize,selectedColor }) {
   const { images, description, id, creationAt, category, price, title } =
     product;
   function addToCart(product, e) {
@@ -256,41 +257,9 @@ export function ListCard({ product, dispatch,selectedSize,selectedColor }) {
       </div>
     </div>
   );
-}
-// export function TopCard({ name, image, price, id = 1 }) {
-//   return (
-//     <>
-//       <div className="list-card top-card" >
-//         <div className="card-image">
-//           <img
-//             loading="lazy"
-//             src={require(`../assets/products/${image}.webp`)}
-//             alt=""
-//           />
-//           <div className="action-btns">
-//             <Link to={`/products/${id}`}>
-//               <div className="preview">
-//                 <FontAwesomeIcon icon={faEye} />
-//               </div>
-//             </Link>
-//           </div>
-//         </div>
-//         <div className="card-text">
-//           <div className="card-name">{name}</div>
-//           <div className="card-price">${price}</div>
-//           <div className="bottom">
-//             <div
-//               className="heart hoverable"
-//               onClick={(e) => addToWishlist(1, e)}
-//             >
-//               <FontAwesomeIcon icon={faHeart} />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
+})
+exports.ListCard=ListCard
+
 export function CartCard({ product }) {
   const { title, price, quantity, images, id } = product;
   const { state, dispatch } = useContext(DataContext);

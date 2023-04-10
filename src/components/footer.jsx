@@ -1,12 +1,12 @@
 import { appName } from "../base";
 import { DataContext } from "../controller/state";
 import "../styles/footer.css";
-import { useContext, useState } from "react";
+import { useContext, useState,memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faHeadset, faMailForward, faSearch } from "@fortawesome/free-solid-svg-icons";
 
-export default function Footer() {
+ const Footer= memo(function Footer() {
   const { state, dispatch } = useContext(DataContext);
   const { shopProducts } = state;
   const navigate=useNavigate()
@@ -103,4 +103,5 @@ export default function Footer() {
       </div>
     </>
   );
-}
+ })
+export default Footer
